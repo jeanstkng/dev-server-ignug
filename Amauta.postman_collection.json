@@ -1,0 +1,954 @@
+{
+	"info": {
+		"_postman_id": "4a6aecb6-50df-4995-82db-ac113bde7ae5",
+		"name": "Amauta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signup_professional",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"name1\": \"CESAR\",\n        \"name2\": \"MAURICIO\",\n        \"last_name1\": \"TAMAYO\",\n        \"last_name2\": \"LOPEZ\",\n        \"user_name\": \"TAMAYO CESAR\",\n        \"phone\": \"0982417259\",\n        \"email\": \"cesar@gmail.com\",\n        \"password\": \"123456\"\n    },\n    \"professional\": {\n        \"identification\": \"1724909443\",\n        \"birthdate\": \"04/12/1990\",\n        \"gender\": 1,\n        \"phone\": {\n            \"area_code\": \"593\",\n            \"number\": \"0982417259\",\n            \"type\": \"CELULAR\"\n        },\n        \"address\": {\n            \"sector\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"main_street\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"secondary_street\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"postal_code\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"number\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"longitude\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"latitude\": \"La Ecuantorian, Clemente Concha, Pasaje E\"\n        },\n        \"nationality\": {\n            \"id\": 1\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/signup/professional",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup",
+								"professional"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n    \t\"id\": 1,\n        \"name1\": \"CESAR\",\n        \"name2\": \"MAURICIO\",\n        \"last_name1\": \"TAMAYO\",\n        \"last_name2\": \"LOPEZ\",\n        \"user_name\": \"TAMAYO CESAR\",\n        \"phone\": \"023660516\",\n        \"email\": \"cesar@gmail.com\",\n        \"password\": \"123456\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/users?Content-Type=application/json&X-Requested-With=XMLHttpRequest&Authorization=Bearer ",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"users"
+							],
+							"query": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-Requested-With",
+									"value": "XMLHttpRequest"
+								},
+								{
+									"key": "Authorization",
+									"value": "Bearer "
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup_student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"name1\": \"CESAR\",\n        \"name2\": \"MAURICIO\",\n        \"last_name1\": \"TAMAYO\",\n        \"last_name2\": \"LOPEZ\",\n        \"user_name\": \"TAMAYO CESAR\",\n        \"phone\": \"0987654321\",\n        \"email\": \"cesar@gmail.com\",\n        \"password\": \"123456\"\n    },\n    \"student\": {\n        \"identification\": \"1724909443\",\n        \"birthdate\": \"04/12/1990\",\n        \"gender\": 1,\n        \"phone\": \"0982417259\",\n        \"suggestion\": \"true\",\n        \"nationality\": {\n            \"id\": 1\n        },\n        \"institution\": {\n            \"id\": 1\n        },\n        \"grade\": {\n            \"id\": 1\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/signup/student?Content-Type=application/json&X-Requested-With=XMLHttpRequest",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup",
+								"student"
+							],
+							"query": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-Requested-With",
+									"value": "XMLHttpRequest"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload_avatar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_avatar",
+									"type": "file",
+									"src": "/C:/Users/Nicolas/Desktop/firma.png"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/users/avatar?Content-Type=application/json&X-Requested-With=XMLHttpRequest&Authorization=Bearer ",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"users",
+								"avatar"
+							],
+							"query": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-Requested-With",
+									"value": "XMLHttpRequest"
+								},
+								{
+									"key": "Authorization",
+									"value": "Bearer "
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/login?user_name=cesar@gmail.com&email=cesar@gmail.com&password=123456",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "user_name",
+									"value": "cesar@gmail.com"
+								},
+								{
+									"key": "email",
+									"value": "cesar@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Requested-With",
+								"type": "text",
+								"value": "XMLHttpRequest"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGFhOTAwNjMyZTE3OTM3YmQ0MDRkMjA4N2EyZDU5MmFjZGRjMTM5OWE4ZTcyY2U1YWRhNDEzYjIyNGEyMzUxMmM1Y2JjMmNiOTE3YzdlZmQiLCJpYXQiOjE1OTIxOTY5NzcsIm5iZiI6MTU5MjE5Njk3NywiZXhwIjoxNTkyMjgzMzc3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.K5M06HDcPTsdF5Y5HilPnkcsfEwq_ayHN3wFIqOdpPQcjK373_rgQp78HyJk4ULv_4XOEgbKAdHh3zeeFYyMRGJ4aEW5JcIR3Pz0-yuAjJwZyQFZoEGvGIxxMf-6CbfdydlXToVjTooogV7E7VeNwFx-u6r6DgGjf7aLF1j456Ki9H_sTGoy-Izl9OQe1TbB_Ltwd9EMuJMvt_XPN91KuzwEv56SISJoMLm-QpfXSvGX0ZHGeeBFG2d7iBLhRhpvhdMvizehrsT1IA_yDFoJUnXrgtNeZM5VuzT0KBrtfefvfvqa7mN6VjHhi8MstEC54UWgNx6cYbkAbHjISQrTbluvA2FgVHqtrinGoSrBnPQaj8iBTe6V0PQDv-Guw0FXo8vbBY4h32XTHfcqHUPBqez_p5o9eT5gwHJsklECnumvKbfNzp-hQ2Z3u4lraXKjB2qXromPLRg_bvaKF527rLc_xqQfoBxv2_r7Cz52ZQN64H03b1X3V6FAH-4n1YjzJEXpc--lfLbQGFjZui7qvLNpL46xj5B0JOCJTBPRy0lbvYd-9K5AxTaA7QcRdXruJhWVAICiMJ6NGWJz5SkCb-H3Xg7NGOtbAjdHKhwRny9RREeZmVgjQx_WZkdZiwwukFgpsQnBU7lseK9j8YYBocZPF96nDcZg0uxo5JmuteA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/logout?email=cesar@gmail.com",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "cesar@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "institutions",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/institutions/get_all?Content-Type=application/json&X-Requested-With=XMLHttpRequest&Authorization=Bearer ",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"institutions",
+								"get_all"
+							],
+							"query": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-Requested-With",
+									"value": "XMLHttpRequest"
+								},
+								{
+									"key": "Authorization",
+									"value": "Bearer "
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "grades",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/grades/get_all?Content-Type=application/json&X-Requested-With=XMLHttpRequest&Authorization=Bearer ",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"grades",
+								"get_all"
+							],
+							"query": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-Requested-With",
+									"value": "XMLHttpRequest"
+								},
+								{
+									"key": "Authorization",
+									"value": "Bearer "
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "nationalities",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/nationalities/get_all?Content-Type=application/json&X-Requested-With=XMLHttpRequest&Authorization=Bearer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"nationalities",
+								"get_all"
+							],
+							"query": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-Requested-With",
+									"value": "XMLHttpRequest"
+								},
+								{
+									"key": "Authorization",
+									"value": "Bearer"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "professional_degrees",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/professional_degrees/get_all?Content-Type=application/json&X-Requested-With=XMLHttpRequest&Authorization=Bearer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"professional_degrees",
+								"get_all"
+							],
+							"query": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-Requested-With",
+									"value": "XMLHttpRequest"
+								},
+								{
+									"key": "Authorization",
+									"value": "Bearer"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "professionals",
+			"item": [
+				{
+					"name": "update_professional",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"professional\": {\n        \"id\": 1,\n        \"identification\": \"1724909443\",\n        \"birthdate\": \"04/12/1990\",\n        \"gender\": 1,\n        \"about_me\": \"soy yo\",\n        \"website\": \"www\",\n        \"nationality\": {\n            \"id\": 1\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/professionals",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"professionals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_phone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"professional\": {\n        \"id\": 1,\n         \"phone\": {\n            \"area_code\": \"593\",\n            \"number\": \"0982417259\",\n            \"type\": \"CELULAR\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/professionals/phones",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"professionals",
+								"phones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_phone",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"professional\": {\n        \"id\": 1,\n         \"phone\": {\n         \t\"id\": 1,\n            \"area_code\": \"00593\",\n            \"number\": \"021\",\n            \"type\": \"FAX\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/professionals/phones",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"professionals",
+								"phones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"professional\": {\n        \"id\": 1,\n        \"address\": {\n            \"sector\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"main_street\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"secondary_street\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"postal_code\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"number\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"longitude\": \"La Ecuantorian, Clemente Concha, Pasaje E\",\n            \"latitude\": \"La Ecuantorian, Clemente Concha, Pasaje E\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/professionals/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"professionals",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_address",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"professional\": {\n        \"id\": 1,\n        \"address\": {\n        \t\"id\": 1,\n            \"sector\": \"La Ecuantoria, Clemente Concha, Pasaje E\",\n            \"main_street\": \"La Ecuantoria, Clemente Concha, Pasaje E\",\n            \"secondary_street\": \"La Ecuantoria, Clemente Concha, Pasaje E\",\n            \"postal_code\": \"La Ecuantoria, Clemente Concha, Pasaje E\",\n            \"number\": \"La Ecuantoria, Clemente Concha, Pasaje E\",\n            \"longitude\": \"La Ecuantoria, Clemente Concha, Pasaje E\",\n            \"latitude\": \"La Ecuantoria, Clemente Concha, Pasaje E\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/professionals/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"professionals",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload_criminal_record_url",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_criminal_record",
+									"type": "file",
+									"src": "/C:/Users/Nicolas/Downloads/cert_ant_penales_1724909443.pdf"
+								},
+								{
+									"key": "professional_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/upload_criminal_record_uri",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"upload_criminal_record_uri"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_academic_formation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "registration_date",
+									"value": "04/12/1990",
+									"type": "text"
+								},
+								{
+									"key": "senescyt_code",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "professional_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "institution_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "professional_degree_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "file_degree_senescyt",
+									"type": "file",
+									"src": "/C:/Users/Nicolas/Desktop/firma.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/professionals/academic_formations/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"professionals",
+								"academic_formations",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_academic_formation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Requested-With",
+								"type": "text",
+								"value": "XMLHttpRequest"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "registration_date",
+									"value": "04/12/1990",
+									"type": "text"
+								},
+								{
+									"key": "senescyt_code",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "professional_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "institution_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "professional_degree_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "file_degree_senescyt",
+									"type": "file",
+									"src": "/C:/Users/Nicolas/Desktop/Declaracion-s.pdf"
+								},
+								{
+									"key": "academic_formation_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/professionals/academic_formations/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"professionals",
+								"academic_formations",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,20 @@
+Migration table created successfully.
+Migrating: 2016_06_01_000001_create_oauth_auth_codes_table
+Migrated:  2016_06_01_000001_create_oauth_auth_codes_table (0.03 seconds)
+Migrating: 2016_06_01_000002_create_oauth_access_tokens_table
+Migrated:  2016_06_01_000002_create_oauth_access_tokens_table (0.01 seconds)
+Migrating: 2016_06_01_000003_create_oauth_refresh_tokens_table
+Migrated:  2016_06_01_000003_create_oauth_refresh_tokens_table (0 seconds)
+Migrating: 2016_06_01_000004_create_oauth_clients_table
+Migrated:  2016_06_01_000004_create_oauth_clients_table (0.01 seconds)
+Migrating: 2016_06_01_000005_create_oauth_personal_access_clients_table
+Migrated:  2016_06_01_000005_create_oauth_personal_access_clients_table (0 seconds)
+Migrating: 2020_07_17_0_create_audits_table
+Migrated:  2020_07_17_0_create_audits_table (0.01 seconds)
+Migrating: 2020_07_17_0_create_roles_table
+Migrated:  2020_07_17_0_create_roles_table (0 seconds)
+Migrating: 2020_07_17_0_create_states_table
+Migrated:  2020_07_17_0_create_states_table (0 seconds)
+Migrating: 2020_07_17_1_create_users_table
+Migrated:  2020_07_17_1_create_users_table (0.02 seconds)
+Database seeding completed successfully.
