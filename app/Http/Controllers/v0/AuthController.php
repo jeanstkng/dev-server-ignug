@@ -77,7 +77,6 @@ class AuthController extends Controller
             'email' => strtolower(trim($dataUser['email'])),
             'password' => Hash::make(trim($dataUser['password'])),
         ]);
-
         return response()->json(['message' => 'Usuario actualizado', 'user' => $user], 201);
     }
 

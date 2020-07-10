@@ -19,7 +19,7 @@ class User extends Authenticatable implements Auditable
      * @var array
      */
     protected $fillable = [
-        'user_name', 'name1', 'name2', 'last_name1', 'last_name2', 'email', 'password', 'phone', 'state',
+        'user_name', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'email', 'password',
     ];
 
     /**
@@ -51,9 +51,9 @@ class User extends Authenticatable implements Auditable
     }
 
 
-    public function state()
+    public function estadi()
     {
-        return $this->belongsTo(State::class);
+        return $this->belongsTo(Estado::class);
     }
 
     public function role()
@@ -61,5 +61,8 @@ class User extends Authenticatable implements Auditable
         return $this->belongsTo(Role::class);
     }
 
-
+    public function docenteAsistencias()
+    {
+        return $this->hasMany(DocenteAsistencia::class);
+    }
 }
