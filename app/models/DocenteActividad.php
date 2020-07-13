@@ -4,20 +4,30 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DocenteAsistencia extends Model
+class DocenteActividad extends Model
 {
+    protected $table = 'docente_actividades';
     protected $fillable = [
-        'fecha',
+        'descripcion',
+        'porcentaje_avance',
+        'observaciones',
+        'tipo_id',
         'estado_id',
     ];
 
     protected $casts = [
-        'fecha' => 'date:Y-m-d'
+        'hora_inicio' => 'time:H:i:s',
+        'hora_fin' => 'time:H:i:s',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function docenteAsistencia()
+    {
+        return $this->belongsTo(DocenteAsistencia::class);
     }
 
     public function tipo()
@@ -28,15 +38,5 @@ class DocenteAsistencia extends Model
     public function estado()
     {
         return $this->belongsTo(Estado::class);
-    }
-
-    public function jornadaActividades()
-    {
-        return $this->hasMany(JornadaActividad::class);
-    }
-
-    public function docenteActividades()
-    {
-        return $this->hasMany(DocenteActividad::class);
     }
 }

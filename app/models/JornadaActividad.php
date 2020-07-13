@@ -12,6 +12,7 @@ class JornadaActividad extends Model
         'hora_fin',
         'descripcion',
         'duracion',
+        'observaciones',
         'tipo_id',
         'estado_id',
     ];

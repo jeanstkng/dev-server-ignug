@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\v0;
 
+use App\Exports\JornadasExport;
 use App\Http\Controllers\Controller;
 use App\models\Catalogo;
+use App\models\DocenteActividad;
 use App\models\DocenteAsistencia;
 use App\models\JornadaActividad;
 use App\models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DocenteController extends Controller
 {
@@ -65,6 +69,7 @@ class DocenteController extends Controller
         $jornadaActividad = new JornadaActividad([
             'hora_inicio' => $horaInicio,
             'descripcion' => $request->descripcion,
+            'observaciones' => $request->observaciones,
             'tipo_id' => $request->tipo_id,
             'estado_id' => 11
         ]);
@@ -133,18 +138,64 @@ class DocenteController extends Controller
         ]);
     }
 
+    public function crearActividad(Request $request)
+    {
+        $data = $request->json()->all();
+        $dataDocenteActividades = $data['docenteActividades'];
+
+        $fecha = Carbon::now();
+        $docenteAsistencia = DocenteAsistencia::where('user_id', $request->user_id)
+            ->where('fecha', $fecha->format('Y-m-d'))
+            ->first();
+
+        if (!$docenteAsistencia) {
+            $docenteAsistencia = $this->crearDocenteAsistencia($fecha, $request->user_id, $request->descripcion);
+        }
+        $docenteAsistencia->docenteActividades()->delete();
+        foreach ($dataDocenteActividades as $actividad) {
+            $docenteActividad = DocenteActividad::where('tipo_id', $actividad['tipo_id'])->first();
+            if (!$docenteActividad) {
+                $docenteActividad = new DocenteActividad([
+                    'porcentaje_avance' => $actividad['porcentaje_avance'],
+                    'tipo_id' => $actividad['tipo_id'],
+                    'estado_id' => 1
+                ]);
+            }
+            $tipo = Catalogo::findOrFail($actividad['tipo_id']);
+            $docenteActividad->docenteAsistencia()->associate($docenteAsistencia);
+            $docenteActividad->tipo()->associate($tipo);
+            $docenteActividad->save();
+        }
+
+        $docenteActividades = $docenteAsistencia->docenteActividades()->with('tipo')->get();
+        return response()->json(['docente_actividades' => $docenteActividades]);
+
+    }
+
+    public function obtenerActividades(Request $request)
+    {
+        $fecha = Carbon::now()->format('Y/m/d/');
+
+        $docenteAsistencia = DocenteAsistencia::with('docenteActividades')
+            ->with('tipo')
+            ->where('user_id', $request->user_id)
+            ->where('fecha', $fecha)
+            ->where('estado_id', '<>', 3)
+            ->first();
+        $docenteActividades = [];
+        if ($docenteAsistencia) {
+            $docenteActividades = $docenteAsistencia->docenteActividades()
+                ->with('tipo')
+                ->where('estado_id', '<>', 3)
+                ->get();
+        }
+        return response()->json(['docente_actividades' => $docenteActividades], 200);
+    }
+
 // Exportaciones
     public function exportarJornadasDocente(Request $request)
     {
-        $docenteAsistencia = DocenteAsistencia::
-        with(['jornadaActividades' => function ($query) {
-            $query->where('estado_id', 12);
-        }])
-            ->where('estado_id', 1)
-            ->get();
-
-        return response()->json(['docente_asistencias' => $docenteAsistencia], 200);
-
+        return Excel::download(new JornadasExport, 'actividades.xlsx');
     }
 
 }

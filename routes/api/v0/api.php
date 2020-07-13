@@ -37,7 +37,15 @@ Route::group(['prefix' => 'docentes'], function () {
     Route::put('asistencia_laboral', 'v0\DocenteController@actualizarActividad');
     Route::delete('asistencia_laboral', 'v0\DocenteController@eliminarActividad');
     Route::post('asistencia_laboral/finalizar', 'v0\DocenteController@finalizarActividad');
+    Route::post('actividades', 'v0\DocenteController@crearActividad');
+    Route::get('actividades', 'v0\DocenteController@obtenerActividades');
+    Route::group(['middleware' => 'auth:api'], function () {
 
+    });
+});
+
+Route::group(['prefix' => 'catalogos'], function () {
+    Route::get('', 'v0\CatalogoController@obtenerCatalogos');
     Route::group(['middleware' => 'auth:api'], function () {
 
     });

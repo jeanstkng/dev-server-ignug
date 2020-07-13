@@ -18,10 +18,10 @@ class CreateCatalogosTable extends Migration
             $table->integer('codigo_padre_id')->nullable();
             $table->foreign('codigo_padre_id')->references('id')->on('catalogos');
             $table->string('codigo', 100);
-            $table->string('nombre', 250);
+            $table->string('nombre', 500);
             $table->string('tipo');
             $table->string('icono')->nullable();
-            $table->integer('estado');
+            $table->integer('estado_id');
             $table->timestamps();
         });
     }

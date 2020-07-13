@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->foreign('pueblo_nacionalidad_id')->references('id')->on('catalogos');
             $table->integer('tipo_identificacion_id')->nullable();
             $table->foreign('tipo_identificacion_id')->references('id')->on('catalogos');
+            $table->string('identificacion', 20);
             $table->string('nombre1', 50);
             $table->string('nombre2', 50)->nullable();;
             $table->string('apellido1', 50);

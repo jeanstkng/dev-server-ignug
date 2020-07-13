@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJornadaActividadesTable extends Migration
+class CreateDocenteActividadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateJornadaActividadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('jornada_actividades', function (Blueprint $table) {
+        Schema::create('docente_actividades', function (Blueprint $table) {
             $table->id();
             $table->integer('docente_asistencia_id')->nullable();
             $table->foreign('docente_asistencia_id')->references('id')->on('docente_asistencias');
             $table->string('descripcion', 100)->nullable();
+            $table->integer('porcentaje_avance')->default(0);
             $table->string('observaciones', 500)->nullable();
-            $table->time('hora_inicio');
-            $table->time('hora_fin')->nullable();
-            $table->time('duracion')->nullable();
             $table->integer('tipo_id');
             $table->foreign('tipo_id')->references('id')->on('catalogos');
             $table->integer('estado_id')->nullable();
@@ -37,6 +35,6 @@ class CreateJornadaActividadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jornada_actividades');
+        Schema::dropIfExists('docente_actividades');
     }
 }
