@@ -11,21 +11,21 @@ class EstadoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('estados')->insert([
+        DB::table('ignug.estados')->insert([
             'nombre' => 'ACTIVE',
         ]);
-        DB::table('estados')->insert([
+        DB::table('ignug.estados')->insert([
             'nombre' => 'INACTIVE'
         ]);
-        DB::table('estados')->insert([
+        DB::table('ignug.estados')->insert([
             'nombre' => 'DELETED'
         ]);
-        DB::table('estados')->insert([
+        DB::table('ignug.estados')->insert([
             'id' => 11,
             'nombre' => 'IN_PROCESO'
         ]);
 
-        DB::table('estados')->insert([
+        DB::table('ignug.estados')->insert([
             'id' => 12,
             'nombre' => 'FINISHED'
         ]);

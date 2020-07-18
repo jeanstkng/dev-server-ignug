@@ -1,7 +1,8 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
+use App\State;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,6 +19,7 @@ class User extends Authenticatable implements Auditable
      *
      * @var array
      */
+    protected $connection = 'pgsql-authentication';
     protected $fillable = [
         'user_name', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'email', 'password',
     ];
@@ -51,18 +53,23 @@ class User extends Authenticatable implements Auditable
     }
 
 
-    public function estadi()
+    public function state()
     {
-        return $this->belongsTo(Estado::class);
+        return $this->belongsTo(State::class);
     }
 
-    public function role()
+    public function roles()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsToMany(Role::class);
     }
 
-    public function docenteAsistencias()
+    public function teacher()
     {
-        return $this->hasMany(DocenteAsistencia::class);
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function attendances()
+    {
+        return $this->hasManyThrough(Attendance::class, Teacher::class);
     }
 }

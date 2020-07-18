@@ -13,36 +13,32 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::connection('pgsql-authentication')->create('users', function (Blueprint $table) {
             $table->id();
-            $table->integer('role_id');
-            $table->foreign('role_id')->references('id')->on('roles');
             $table->integer('etnia_id')->nullable();
-            $table->foreign('etnia_id')->references('id')->on('catalogos');
-            $table->integer('pueblo_nacionalidad_id')->nullable();
-            $table->foreign('pueblo_nacionalidad_id')->references('id')->on('catalogos');
-            $table->integer('tipo_identificacion_id')->nullable();
-            $table->foreign('tipo_identificacion_id')->references('id')->on('catalogos');
-            $table->string('identificacion', 20);
-            $table->string('nombre1', 50);
-            $table->string('nombre2', 50)->nullable();;
-            $table->string('apellido1', 50);
-            $table->string('apellido2', 50)->nullable();
-            $table->integer('sexo_id')->nullable();
-            $table->foreign('sexo_id')->references('id')->on('catalogos');
-            $table->integer('genero_id')->nullable();
-            $table->foreign('genero_id')->references('id')->on('catalogos');
-            $table->string('correo_personal', 50)->nullable()->unique();
-            $table->date('fecha_nacimiento')->nullable();
-            $table->integer('tipo_sangre_id')->nullable();
-            $table->foreign('tipo_sangre_id')->references('id')->on('catalogos');
-            $table->string('avatar')->nullable();
+            $table->foreign('etnia_id')->references('id')->on('ignug.catalogues');
+            $table->integer('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('ignug.catalogues');
+            $table->integer('identification_type_id');
+            $table->foreign('identification_type_id')->references('id')->on('ignug.catalogues');
+            $table->string('identification', 20);
+            $table->string('first_name', 50);
+            $table->string('second_name', 50)->nullable();
+            $table->string('first_lastname', 50);
+            $table->string('second_lastname', 50)->nullable();
+            $table->integer('sex_id')->nullable();
+            $table->foreign('sex_id')->references('id')->on('ignug.catalogues');
+            $table->integer('gender_id')->nullable();
+            $table->foreign('gender_id')->references('id')->on('ignug.catalogues');
+            $table->string('personal_email', 50)->nullable()->unique();
+            $table->date('birthday')->nullable();
+            $table->integer('blood_type_id')->nullable();
+            $table->foreign('blood_type_id')->references('id')->on('ignug.catalogues');
             $table->string('user_name', 25);
             $table->string('email', 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 100);
-            $table->integer('estado_id')->nullable();;
-            $table->foreign('estado_id')->references('id')->on('estados');
+            $table->foreignId('state_id')->constrained();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -55,6 +51,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::connection('pgsql-authentication')->dropIfExists('users');
     }
 }

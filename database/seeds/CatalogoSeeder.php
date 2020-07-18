@@ -12,7 +12,7 @@ class CatalogoSeeder extends Seeder
     public function run()
     {
         //        Jornada Actividades  Principal
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo' => 'jornada',
             'nombre' => 'Jornada',
             'tipo' => 'jornada_actividades.principal',
@@ -21,7 +21,7 @@ class CatalogoSeeder extends Seeder
         ]);
 
         //        Jornada Actividades Secundaria
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo' => 'almuerzo',
             'nombre' => 'Almuerzo',
             'tipo' => 'jornada_actividades.secundaria',
@@ -30,28 +30,28 @@ class CatalogoSeeder extends Seeder
         ]);
 
         //        Jornada Activiades Procesos
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo' => 'academico',
             'nombre' => 'ACADEMICO',
             'tipo' => 'jornada_actividades.procesos',
             'icono' => 'pi pi-calendar',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
-            'codigo' => 'administrativo',
+        DB::table('ignug.catalogos')->insert([
+            'codigo' => 'administrative',
             'nombre' => 'ADMINISTRATIVO',
             'tipo' => 'jornada_actividades.procesos',
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo' => 'vinculacion',
             'nombre' => 'VINCULACION',
             'tipo' => 'jornada_actividades.procesos',
             'icono' => 'pi pi-calendar',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo' => 'investigacion',
             'nombre' => 'INVESTIGACION',
             'tipo' => 'jornada_actividades.procesos',
@@ -60,7 +60,7 @@ class CatalogoSeeder extends Seeder
         ]);
 
         //        Docente Activiades ACADEMICO
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 3,
             'codigo' => '1',
             'nombre' => 'IMPARTIR CLASES PRESENCIALES, VIRTUALES O EN LINEA',
@@ -68,7 +68,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 3,
             'codigo' => '2',
             'nombre' => 'PREPARACION Y ACTUALIZACION DE CLASES, SEMINARIOS, TALLERES Y OTROS',
@@ -76,7 +76,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 3,
             'codigo' => '3',
             'nombre' => 'DISEÑO Y ELABORACION DE GUIAS, MATERIAL DIDACTICO Y SYLLABUS',
@@ -84,7 +84,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 3,
             'codigo' => '4',
             'nombre' => 'ORIENTACION Y ACOMPAÑAMIENTO A TRAVES DE TUTORIAS PRESENCIALES O VIRTUALES, INDIVIDUALES O GRUPALES',
@@ -92,7 +92,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 3,
             'codigo' => '5',
             'nombre' => 'ELABORACION DE REPORTES DE NIVEL ACADEMICO REFERENTE A EVALUACIONES, TRABAJOS Y RENDIMIENTO DEL ESTUDIANTE',
@@ -100,7 +100,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 3,
             'codigo' => '6',
             'nombre' => 'VISITAS DE CAMPO',
@@ -108,7 +108,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 3,
             'codigo' => '7',
             'nombre' => 'PREPARACION, ELABORACION, APLICACION Y CALIFICACION DE EXAMENES Y  PRACTICAS ',
@@ -118,7 +118,7 @@ class CatalogoSeeder extends Seeder
         ]);
 
         //        Docente Activiades ADMINISTRATIVO
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 4,
             'codigo' => '1',
             'nombre' => 'PARTICIPACION EN PROCESOS DEL SISTEMA NACIONAL DE EVALUACION PARA INGRESO A UNIVERSIDADES',
@@ -126,7 +126,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 4,
             'codigo' => '2',
             'nombre' => 'ACTIVIDADES DE DIRECCION O GESTION EN SUS DISTINTOS NIVEL ES DE ORGANIZACION ACADEMICA E INSTITUCIONAL',
@@ -134,7 +134,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 4,
             'codigo' => '3',
             'nombre' => 'REUNIONES DE ORGANO COLEGIADO SUPERIOR',
@@ -142,7 +142,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 4,
             'codigo' => '4',
             'nombre' => 'DISEÑO DE PROYECTOS DE CARRERAS Y PROGRAMAS DE ESTUDIOS',
@@ -150,7 +150,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 4,
             'codigo' => '5',
             'nombre' => 'ACTIVIDADES RELACIONADAS CON LA EVALUACION INSTITUCIONAL EXTERNA',
@@ -160,7 +160,7 @@ class CatalogoSeeder extends Seeder
         ]);
 
         //        Docente Activiades VINCULACION
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 5,
             'codigo' => '1',
             'nombre' => 'DIRECCION SEGUIMIENTO Y EVALUACION DE PRACTICAS PRE PROFESIONALES',
@@ -168,7 +168,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 5,
             'codigo' => '2',
             'nombre' => 'DISEÑO E IMPARTICION DE CURSOS DE EDUCACION CONTINUA O DE CAPACITACION Y ACTUALIZACION',
@@ -176,7 +176,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 5,
             'codigo' => '3',
             'nombre' => 'PARTICIPACION EN ACTIVIDADES DE PROYECTOS SOCIALES, ARTISTICOS, PRODUCTIVOS Y EMPRESARIALES DE VINCULACION CON LA SOCIEDAD',
@@ -184,7 +184,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 5,
             'codigo' => '4',
             'nombre' => 'ELABORACION DE INFORMES DE SEGUIMIENTO DE PROYECTOS DE VINCULACION',
@@ -194,7 +194,7 @@ class CatalogoSeeder extends Seeder
         ]);
 
         //        Docente Activiades INVESTIGACION
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 6,
             'codigo' => '1',
             'nombre' => 'GESTIONAR PROYECTOS DE INVESTIGACION, COMUNITARIOS Y/O DE EMPRENDIMIENTO',
@@ -202,7 +202,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 6,
             'codigo' => '2',
             'nombre' => 'DIRECCION Y TUTORIAS PARA LA ELABORACION DE TRABAJOS PARA LA OBTENCION DE TITULO',
@@ -210,7 +210,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 6,
             'codigo' => '3',
             'nombre' => 'DIRECCION Y PARTICIPACION DE PROYECTOS DE INVESTIGACION E INNOVACION BASICA, APLICADA, TECNOLOGICA',
@@ -218,7 +218,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 6,
             'codigo' => '4',
             'nombre' => 'REALIZACION DE INVESTIGACION PARA LA RECUPERACION, FORTALECIMIENTO Y POTENCIAC ION DE LOS SABERES ANCESTRALES',
@@ -226,7 +226,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 6,
             'codigo' => '5',
             'nombre' => 'PARTICIPACION EN CONGRESOS, SEMINARIOS Y CONFERENCIAS PARA LA PRESENTACION DE AVANCES Y RESULTADOS DE SUS INVESTIGACIONES',
@@ -234,7 +234,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 6,
             'codigo' => '6',
             'nombre' => 'DISEÑO, GESTION Y PARTICIPACION EN REDES Y PROGRAMAS DE INVESTIGACION LOCAL NACIONAL E INTERNACIONAL',
@@ -242,7 +242,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 6,
             'codigo' => '7',
             'nombre' => 'PARTICIPACION EN COMITES O CONSEJOS ACADEMICOS Y EDITORIALES DE REVISTAS CIENTIFICAS Y
@@ -251,7 +251,7 @@ class CatalogoSeeder extends Seeder
             'icono' => 'pi pi-briefcase',
             'estado_id' => 1,
         ]);
-        DB::table('catalogos')->insert([
+        DB::table('ignug.catalogos')->insert([
             'codigo_padre_id' => 6,
             'codigo' => '8',
             'nombre' => 'DIFUSION DE RESULTADOS Y BENEFICIOS SOCIALES DE LA INVESTIGACION, A TRAVES DE PUBLICACIONES,

@@ -4,11 +4,11 @@ namespace App\Http\Controllers\v0;
 
 use App\Exports\JornadasExport;
 use App\Http\Controllers\Controller;
-use App\models\Catalogo;
-use App\models\DocenteActividad;
-use App\models\DocenteAsistencia;
-use App\models\JornadaActividad;
-use App\models\User;
+use App\Models\Catalogo;
+use App\Models\DocenteActividad;
+use App\Models\DocenteAsistencia;
+use App\Models\JornadaActividad;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

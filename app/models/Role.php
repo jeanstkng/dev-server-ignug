@@ -1,6 +1,6 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +12,7 @@ class Role extends Model
      *
      * @var array
      */
+    protected $connection = 'pgsql-authentication';
     protected $fillable = [
         'code',
         'name',
@@ -20,8 +21,7 @@ class Role extends Model
 
     public function users()
     {
-        return $this->hasOne('App\Role');
+        return $this->belongsToMany(User::class);
     }
-
 
 }
