@@ -15,8 +15,7 @@ class CreateCareerablesTable extends Migration
     {
         Schema::connection('pgsql-ignug')->create('careerables', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('career_id')->unsigned();
-            $table->foreign('career_id')->references('id')->on('careers');
+            $table->foreignId('career_id')->constrained();
             $table->morphs('careerable');
         });
     }

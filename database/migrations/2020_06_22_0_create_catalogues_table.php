@@ -19,8 +19,8 @@ class CreateCataloguesTable extends Migration
             $table->foreign('parent_code_id')->references('id')->on('catalogues');
             $table->string('code', 100);
             $table->string('name', 500);
-            $table->string('type');
-            $table->string('icon')->nullable();
+            $table->string('type', 200);
+            $table->string('icon', 200)->nullable();
             $table->foreignId('state_id')->constrained();
             $table->timestamps();
         });

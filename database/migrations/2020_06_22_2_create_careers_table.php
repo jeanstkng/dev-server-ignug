@@ -15,20 +15,16 @@ class CreateCareersTable extends Migration
     {
         Schema::connection('pgsql-ignug')->create('careers', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('institution_id');
-            $table->foreign('institution_id')->references('id')->on('institutions');
+            $table->foreignId('institution_id')->constrained();
             $table->string('code', 50)->nullable();;
             $table->string('name', 200);
-            $table->string('description', 200);
-            $table->bigInteger('modality_id');
-            $table->foreign('modality_id')->references('id')->on('catalogues');
-            $table->string('numero_resolucion', 150)->nullable();
-            $table->string('title', 200);
-            $table->string('acronym', 50);
-            $table->integer('type_id');
-            $table->foreign('type_id')->references('id')->on('catalogues');
-            $table->bigInteger('state_id');
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->string('description', 500);
+            $table->foreignId('modality_id')->constrained('catalogues');
+            $table->string('resolution_number', 500)->nullable();
+            $table->string('title', 500);
+            $table->string('acronym', 100);
+            $table->foreignId('type_id')->constrained('catalogues');
+            $table->foreignId('state_id')->constrained();
             $table->timestamps();
         });
     }

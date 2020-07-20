@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\v0;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,7 +16,11 @@ class AuthController extends Controller
 {
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();
+        DB::table('oauth_access_tokens')
+            ->where('user_id', $request->user_id)
+            ->update([
+                'revoked' => true
+            ]);
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -31,7 +36,18 @@ class AuthController extends Controller
             'password' => 'required|string',
 
         ]);
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        $user = User::where('identification', $request->user_name)->with('roles')->first();
+        if (!$user) {
+            return response()->json([
+                'errors' => [
+                    'status' => 404,
+                    'title' => 'Not Found',
+                    'detail' => 'User not found'
+                ]
+            ], 404);
+        }
+        $roles = $user->roles()->get();
+        if (!Auth::attempt(['identification' => $request->user_name, 'password' => $request->password])) {
             return response()->json('Unauthorized', 401);
         }
 
@@ -40,7 +56,10 @@ class AuthController extends Controller
         if ($request->remember_me) {
             $accessToken->token->expires_at = Carbon::now()->addWeeks(1);
         }
-        return response()->json(['user' => Auth::user()->makeHidden(['created_at', 'updated_at']), 'token' => $accessToken], 201);
+        return response()->json([
+            'user' => Auth::user()->makeHidden(['created_at', 'updated_at']),
+            'roles' => $roles,
+            'token' => $accessToken], 201);
     }
 
     private function createUser($dataUser, $role)

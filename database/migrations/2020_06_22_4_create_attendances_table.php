@@ -17,10 +17,8 @@ class CreateAttendancesTable extends Migration
             $table->id();
             $table->morphs('attendanceable');
             $table->date('date');
-            $table->bigInteger('type_id');
-            $table->foreign('type_id')->references('id')->on('catalogues');
-            $table->bigInteger('state_id');
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->foreignId('type_id')->constrained('catalogues');
+            $table->foreignId('state_id')->constrained();
             $table->timestamps();
         });
     }

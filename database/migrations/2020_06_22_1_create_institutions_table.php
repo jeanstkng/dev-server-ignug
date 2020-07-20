@@ -17,7 +17,7 @@ class CreateInstitutionsTable extends Migration
             $table->id();
             $table->string('code', 200)->nullable();
             $table->string('name', 200);
-            $table->string('slogan', 200)->nullable();
+            $table->string('slogan', 500)->nullable();
             $table->foreignId('state_id')->constrained();
             $table->timestamps();
         });

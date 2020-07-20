@@ -16,15 +16,13 @@ class CreateWorkdaysTable extends Migration
         Schema::connection('pgsql-ignug')->create('workdays', function (Blueprint $table) {
             $table->id();
             $table->morphs('workdayable');
-            $table->string('description', 200)->nullable();
+            $table->string('description', 300)->nullable();
             $table->string('observations', 500)->nullable();
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
             $table->time('duration')->nullable();
-            $table->integer('type_id');
-            $table->foreign('type_id')->references('id')->on('catalogues');
-            $table->integer('state_id')->nullable();
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->foreignId('type_id')->constrained('catalogues');
+            $table->foreignId('state_id')->constrained();
             $table->timestamps();
         });
     }

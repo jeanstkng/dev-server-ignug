@@ -16,8 +16,8 @@ class CreateRolesTable extends Migration
         Schema::connection('pgsql-authentication')->create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('code', 20);
-            $table->string('name', 20);
-            $table->foreignId('state_id')->constrained();
+            $table->string('name', 100);
+            $table->foreignId('state_id')->constrained('ignug.states');
             $table->timestamps();
         });
     }

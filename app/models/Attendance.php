@@ -32,11 +32,11 @@ class Attendance extends Model
 
     public function workdays()
     {
-        return $this->morphMany(Workday::class,'workdayable');
+        return $this->morphMany(Workday::class, 'workdayable');
     }
 
     public function tasks()
     {
-        return $this->morphMany(Task::class,'taskable');
+        return $this->morphMany(Task::class, 'taskable');
     }
 }

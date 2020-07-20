@@ -15,10 +15,8 @@ class CreateTeachersTable extends Migration
     {
         Schema::connection('pgsql-ignug')->create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('authentication.users');
-            $table->integer('state_id');
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->foreignId('user_id')->constrained('authentication.users');
+            $table->foreignId('state_id')->constrained();
             $table->timestamps();
         });
     }

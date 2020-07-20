@@ -17,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
+Route::get('passwords', function () {
+    $users = \App\User::orderBy('id')->get();
+    $passwords = array();
+    $users2 = array();
+    foreach ($users as $user) {
+        $passwords[] = \Illuminate\Support\Facades\Hash::make($user->identification);
+        $users2[] = $user->first_lastname;
+    }
+    return response()->json(['users' => $users2, 'passwords' => $passwords]);
+});
 
 // Users
 Route::group(['prefix' => 'auth'], function () {
@@ -75,7 +85,7 @@ Route::group(['prefix' => 'tasks'], function () {
 });
 
 Route::group(['prefix' => 'attendances'], function () {
-    Route::get('', 'v0\AttendanceController@index');
+    Route::get('all', 'v0\AttendanceController@all');
     Route::get('{id}', 'v0\AttendanceController@show');
     Route::post('', 'v0\AttendanceController@store');
     Route::put('', 'v0\AttendanceController@update');

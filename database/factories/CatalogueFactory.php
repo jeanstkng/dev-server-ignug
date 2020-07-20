@@ -6,5 +6,7 @@ use App\Models\Catalogue;
 use Faker\Generator as Faker;
 
 $factory->define(Catalogue::class, function (Faker $faker) {
-    return [];
+    return [
+
+    ];
 });

@@ -16,13 +16,11 @@ class CreateTasksTable extends Migration
         Schema::connection('pgsql-ignug')->create('tasks', function (Blueprint $table) {
             $table->id();
             $table->morphs('taskable');
-            $table->string('description', 200)->nullable();
+            $table->string('description', 300)->nullable();
             $table->integer('percentage_advance')->default(0);
             $table->string('observations', 500)->nullable();
-            $table->integer('type_id');
-            $table->foreign('type_id')->references('id')->on('catalogues');
-            $table->integer('state_id');
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->foreignId('type_id')->constrained('catalogues');
+            $table->foreignId('state_id')->constrained();
             $table->timestamps();
         });
     }

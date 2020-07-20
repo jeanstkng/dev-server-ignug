@@ -16,6 +16,12 @@ class CreateImagesTable extends Migration
         Schema::connection('pgsql-ignug')->create('images', function (Blueprint $table) {
             $table->id();
             $table->morphs('imageable');
+            $table->string('code', 100);
+            $table->string('name', 200);
+            $table->string('description', 500);
+            $table->string('type', 200);
+            $table->string('icon', 200)->nullable();
+            $table->foreignId('state_id')->constrained();
             $table->timestamps();
         });
     }
