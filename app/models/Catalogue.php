@@ -19,4 +19,9 @@ class Catalogue extends Model
     {
         return $this->belongsTo(State::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Catalogue::class, 'parent_code_id');
+    }
 }

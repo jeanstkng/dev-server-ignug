@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Models\Catalogue::class)->create([
             'code' => 'administrative',
             'name' => 'ADMINISTRATIVO',
-            'type' => 'tasks.processes',
+            'type' => 'tasks.process',
             'icon' => 'pi pi-calendar',
             'state_id' => 1,
         ]);

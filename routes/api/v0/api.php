@@ -75,6 +75,7 @@ Route::group(['prefix' => 'workdays'], function () {
 
 Route::group(['prefix' => 'tasks'], function () {
     Route::get('all', 'v0\TaskController@all');
+    Route::get('catalogues', 'v0\TaskController@allCatalogues');
     Route::get('current_day', 'v0\TaskController@getCurrenDate');
     Route::post('', 'v0\TaskController@store');
     Route::put('', 'v0\TaskController@update');

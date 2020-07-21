@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('location_id')->constrained('ignug.catalogues');
             $table->foreignId('identification_type_id')->constrained('ignug.catalogues');
             $table->string('identification', 20);
+            $table->string('postal_code', 20)->nullable();
             $table->string('first_name', 1000);
             $table->string('second_name', 100)->nullable();
             $table->string('first_lastname', 100);

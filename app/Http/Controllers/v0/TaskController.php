@@ -14,6 +14,17 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function allCatalogues(Request $request)
+    {
+        $tasks = Catalogue::with('tasks')->where('type', 'tasks.process')->get();
+        return response()->json([
+            'data' => [
+                'type' => 'attendances',
+                'attributes' => $tasks
+            ]
+        ], 200);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,15 +60,18 @@ class TaskController extends Controller
 
         $teacher = Teacher::where('user_id', $request->user_id)->first();
         $attendance = $teacher->attendances()->where('date', $currentDate)->first();
-
         if ($attendance) {
-            $attendance->tasks()->delete();
             foreach ($dataTasks as $dataTask) {
                 $this->createTask($dataTask, $attendance);
             }
         }
 
-        return response()->json(['tasks' => $attendance->tasks()->where('state_id', '<>', '3')->get()]);
+        return response()->json([
+            'data' => [
+                'attributes' => $attendance->tasks()->with('type')->where('state_id', '<>', '3')->get(),
+                'type' => 'tasks'
+            ]
+        ]);
     }
 
     /**
@@ -95,7 +109,6 @@ class TaskController extends Controller
      */
     public function update(Request $request)
     {
-        $currentTime = Carbon::now()->format('H:i:s');
         $data = $request->json()->all();
         $dataTask = $data['task'];
 

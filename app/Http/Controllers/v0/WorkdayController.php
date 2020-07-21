@@ -44,6 +44,8 @@ class WorkdayController extends Controller
     public function store(Request $request)
     {
         $currentDate = Carbon::now()->format('Y/m/d/');
+        $currentTime = Carbon::now()->format('H:i:s');
+
         $data = $request->json()->all();
         $dataAttendance = $data['attendance'];
         $dataWorkday = $data['workday'];
@@ -53,6 +55,7 @@ class WorkdayController extends Controller
         if (!$attendance) {
             $attendance = $this->createAttendance($currentDate, $teacher, $dataAttendance);
         }
+        $dataWorkday['start_time'] = $currentTime;
         $this->createWorkday($dataWorkday, $attendance);
         return response()->json(['workdays' => $attendance->workdays()->where('state_id', '<>', 3)->orderBy('start_time')->get()]);
     }
@@ -92,14 +95,15 @@ class WorkdayController extends Controller
      */
     public function update(Request $request)
     {
+        $currentTime = Carbon::now()->format('H:i:s');
         $data = $request->json()->all();
         $dataWorkday = $data['workday'];
 
         $workday = Workday::findOrFail($dataWorkday['id']);
 
         $workday->update([
-            'end_time' => $dataWorkday['end_time'],
-            'duration' => $this->calculateDuration($workday->start_time, $dataWorkday['end_time']),
+            'end_time' => $currentTime,
+            'duration' => $this->calculateDuration($workday->start_time, $currentTime),
             'observations' => $dataWorkday['observations']
         ]);
 
