@@ -56,14 +56,12 @@ class TaskController extends Controller
     {
         $currentDate = Carbon::now()->format('Y/m/d/');
         $data = $request->json()->all();
-        $dataTasks = $data['tasks'];
+        $dataTask = $data['task'];
 
         $teacher = Teacher::where('user_id', $request->user_id)->first();
         $attendance = $teacher->attendances()->where('date', $currentDate)->first();
         if ($attendance) {
-            foreach ($dataTasks as $dataTask) {
-                $this->createTask($dataTask, $attendance);
-            }
+            $this->createTask($dataTask, $attendance);
         }
 
         return response()->json([
@@ -155,10 +153,19 @@ class TaskController extends Controller
 
     public function createTask($data, $attendance)
     {
-        $task = new Task([
-            'percentage_advance' => $data['percentage_advance'],
-            'description' => $data['description'],
-        ]);
+        $task = $attendance->tasks()->where('type_id', $data['type_id'])->first();
+        if (!$task) {
+            $task = new Task([
+                'percentage_advance' => $data['percentage_advance'],
+                'description' => $data['description'],
+            ]);
+        } else {
+            $task->update([
+                'percentage_advance' => $data['percentage_advance'],
+                'description' => $data['description'],
+            ]);
+        }
+
         $type = Catalogue::findOrFail($data['type_id']);
         $state = State::findOrFail(1);
         $task->taskable()->associate($attendance);

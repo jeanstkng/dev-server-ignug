@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Catalogue extends Model
+use OwenIt\Auditing\Contracts\Auditable;
+class Catalogue extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     protected $connection = 'pgsql-ignug';
     protected $fillable = [
         'code',

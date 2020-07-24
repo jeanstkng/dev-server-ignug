@@ -2,10 +2,14 @@
 
 namespace App;
 
+use App\Models\State;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Role extends Model
+class Role extends Model implements Auditable
 {
+
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +20,6 @@ class Role extends Model
     protected $fillable = [
         'code',
         'name',
-        'state',
     ];
 
     public function users()
@@ -24,4 +27,8 @@ class Role extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 }

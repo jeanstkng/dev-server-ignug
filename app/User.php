@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\Models\Attendance;
+use App\Models\Catalogue;
+use App\Models\State;
+use App\Models\Teacher;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -19,7 +23,18 @@ class User extends Authenticatable implements Auditable
      */
     protected $connection = 'pgsql-authentication';
     protected $fillable = [
-        'user_name', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'email', 'password',
+        'identification',
+        'postal_code',
+        'first_name',
+        'second_name',
+        'first_lastname',
+        'second_lastname',
+        'personal_email',
+        'birthdate',
+        'user_name',
+        'email',
+        'email_verified_at',
+        'password',
     ];
 
     /**
@@ -69,5 +84,34 @@ class User extends Authenticatable implements Auditable
     public function attendances()
     {
         return $this->hasManyThrough(Attendance::class, Teacher::class);
+    }
+
+    public function ethnicOrigin()
+    {
+        return $this->belongsTo(Catalogue::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Catalogue::class);
+    }
+
+    public function identificationType()
+    {
+        return $this->belongsTo(Catalogue::class);
+    }
+
+    public function sex()
+    {
+        return $this->belongsTo(Catalogue::class);
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo(Catalogue::class);
+    }
+    public function bloodType()
+    {
+        return $this->belongsTo(Catalogue::class);
     }
 }

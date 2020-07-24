@@ -147,7 +147,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Models\Catalogue::class)->create([
             'parent_code_id' => 4,
             'code' => '2',
-            'name' => 'ACTIVIDADES DE DIRECCION O GESTION EN SUS DISTINTOS NIVEL ES DE ORGANIZACION ACADEMICA E INSTITUCIONAL',
+            'name' => 'ACTIVIDADES DE DIRECCION O GESTION EN SUS DISTINTOS NIVELES DE ORGANIZACION ACADEMICA E INSTITUCIONAL',
             'type' => 'tasks.activity',
             'icon' => 'pi pi-briefcase',
             'state_id' => 1,

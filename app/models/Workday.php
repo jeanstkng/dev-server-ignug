@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Workday extends Model
+use OwenIt\Auditing\Contracts\Auditable;
+class Workday extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     protected $connection = 'pgsql-ignug';
 
     protected $fillable = [

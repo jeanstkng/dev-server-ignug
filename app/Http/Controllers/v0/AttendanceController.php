@@ -24,16 +24,19 @@ class AttendanceController extends Controller
        authentication.users.second_lastname,
        authentication.users.first_name,
        authentication.users.second_name,
-       workdays.start_time,
-       workdays.end_time
+        min(ignug.workdays.start_time) as start_time,
+        max(ignug.workdays.end_time) as end_time,
+       sum(case when workdays.type_id = 1 then workdays.duration end) - sum(case when workdays.type_id = 2 then workdays.duration end) as duration,
+       sum(case when workdays.type_id = 2 then workdays.duration end) as lunch
 from ignug.attendances
-         inner join ignug.workdays on attendances.id = workdays.workdayable_id
          inner join ignug.teachers on attendances.attendanceable_id = teachers.id
+         inner join ignug.workdays on attendances.id = workdays.workdayable_id
          inner join authentication.users on users.id = teachers.user_id
          inner join ignug.catalogues on attendances.type_id = catalogues.id
-            where workdays.type_id = 1 and users.state_id = 1
+            where workdays.state_id <> 3 and users.state_id = 1
             and ignug.attendances.date between '" . $request->start_date . "' and '" . $request->end_date . "'" .
-            "order by attendances.date, authentication.users.first_lastname;");
+            "group by attendances.date,users.identification,users.first_lastname,users.second_lastname,users.first_name,users.second_name
+            order by attendances.date, start_time, authentication.users.first_lastname;");
 
         return response()->json([
             'data' => [

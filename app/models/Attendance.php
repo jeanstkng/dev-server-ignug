@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Attendance extends Model
+use OwenIt\Auditing\Contracts\Auditable;
+class Attendance extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     protected $connection = 'pgsql-ignug';
     protected $fillable = [
         'date'

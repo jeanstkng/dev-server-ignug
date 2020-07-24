@@ -99,6 +99,17 @@ class AuthController extends Controller
         return response()->json(['message' => 'Usuario actualizado', 'user' => $user], 201);
     }
 
+    public function changePassword(Request $request)
+    {
+        $data = $request->json()->all();
+        $dataUser = $data['user'];
+        $user = User::findOrFail($dataUser['id']);
+        $user->update([
+            'password' => Hash::make(trim($dataUser['password'])),
+        ]);
+        return response()->json(['message' => 'Usuario actualizado', 'user' => $user], 201);
+    }
+
     public function uploadAvatarUri(Request $request)
     {
         if ($request->file('file_avatar')) {
