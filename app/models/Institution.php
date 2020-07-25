@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Institution extends Model implements Auditable
@@ -15,6 +16,16 @@ class Institution extends Model implements Auditable
         'name',
         'slogan',
     ];
+
+    public function setCodeAttribute($value)
+    {
+        $this->attributes['code'] = strtolower($value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtoupper($value);
+    }
 
     public function state()
     {
