@@ -15,10 +15,12 @@ class AttendanceController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function all(Request $request)
+    public function summary(Request $request)
     {
         $attendances = DB::select("
-        select attendances.date,
+        select
+        attendances.id,
+        attendances.date,
        authentication.users.identification,
        authentication.users.first_lastname,
        authentication.users.second_lastname,
@@ -35,8 +37,39 @@ from ignug.attendances
          inner join ignug.catalogues on attendances.type_id = catalogues.id
             where workdays.state_id <> 3 and users.state_id = 1
             and ignug.attendances.date between '" . $request->start_date . "' and '" . $request->end_date . "'" .
-            "group by attendances.date,users.identification,users.first_lastname,users.second_lastname,users.first_name,users.second_name
+            "group by attendances.id, attendances.date,users.identification,users.first_lastname,users.second_lastname,users.first_name,users.second_name
             order by attendances.date, start_time, authentication.users.first_lastname;");
+
+        return response()->json([
+            'data' => [
+                'type' => 'attendances',
+                'attributes' => $attendances
+            ]
+        ], 200);
+    }
+
+    public function detail(Request $request)
+    {
+        $attendances = DB::select("
+        select attendances.date,
+       authentication.users.identification,
+       authentication.users.first_lastname,
+       authentication.users.second_lastname,
+       authentication.users.first_name,
+       authentication.users.second_name,
+       workdays.start_time,
+       workdays.end_time,
+       workdays.duration,
+       workdays.id
+from ignug.attendances
+         inner join ignug.workdays on attendances.id = workdays.workdayable_id
+         inner join ignug.teachers on attendances.attendanceable_id = teachers.id
+         inner join authentication.users on users.id = teachers.user_id
+         inner join ignug.catalogues on workdays.type_id = catalogues.id
+where catalogues.code = 'work'
+  and users.state_id = 1
+  and ignug.attendances.date between '" . $request->start_date . "' and '" . $request->end_date . "'" .
+            "order by attendances.date, workdays.start_time, authentication.users.first_lastname;");
 
         return response()->json([
             'data' => [

@@ -62,6 +62,14 @@ class TaskController extends Controller
         $attendance = $teacher->attendances()->where('date', $currentDate)->first();
         if ($attendance) {
             $this->createTask($dataTask, $attendance);
+        } else {
+            return response()->json([
+                'errorr' => [
+                    'status' => 404,
+                    'title' => 'Attendance not found',
+                    'detail' => ''
+                ]
+            ], 404);
         }
 
         return response()->json([

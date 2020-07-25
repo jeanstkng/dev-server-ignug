@@ -69,10 +69,20 @@ Route::group(['prefix' => 'tasks'], function () {
 
 Route::group(['prefix' => 'attendances'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('all', 'v0\AttendanceController@all');
+        Route::get('summary', 'v0\AttendanceController@summary');
+        Route::get('detail', 'v0\AttendanceController@detail');
         Route::get('{id}', 'v0\AttendanceController@show');
         Route::post('', 'v0\AttendanceController@store');
         Route::put('', 'v0\AttendanceController@update');
         Route::delete('{id}', 'v0\AttendanceController@destroy');
     });
 });
+
+Route::group(['prefix' => 'institutions'], function () {
+
+    Route::group(['middleware' => 'auth:api'], function () {
+
+    });
+});
+
+Route::apiResource('institutions', 'v0\InstitutionController');

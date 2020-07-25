@@ -1,64 +1,78 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\v0;
 
-use App\Institution;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateInstitutionRequest;
+use App\Http\Requests\UpdateInstitutionRequest;
+use App\Models\Institution;
+use App\Models\State;
 use Illuminate\Http\Request;
 
 class InstitutionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        //
+        if ($request->has('search')) {
+            $institutions = Institution::where('name', 'like', '%' . $request->search . '%')->get();
+        } else {
+            $institutions = Institution::all();
+        }
+
+        return response()->json([
+            'data' => [
+                'attributes' => $institutions,
+                'type' => 'institutions'
+            ]
+        ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(CreateInstitutionRequest $request)
     {
-        //
+        $data = $request->all();
+        $state = State::where('code', '1')->first();
+        $institution = $state->institution()->create($data);
+        return response()->json([
+            'data' => [
+                'attributes' => $institution,
+                'type' => 'institution'
+            ]
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Institution $institution)
     {
-        //
+        return $institution;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Institution $institution)
+
+    public function update(UpdateInstitutionRequest $request, Institution $institution)
     {
-        //
+        $data = $request->all();
+        $institution = $institution->update($data);
+        return response()->json([
+            'data' => [
+                'attributes' => $institution,
+                'type' => 'institution'
+            ]
+        ], 201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Institution $institution)
+
+    public function destroy($id)
     {
-        //
+        $state = State::where('code', '3')->first();
+        $institution = Institution::findOrFail($id);
+        $institution->state()->associate($state);
+        $institution->update();
+        return response()->json([
+            'data' => [
+                'attributes' => $institution,
+                'type' => 'institution'
+            ]
+        ], 201);
     }
 }
