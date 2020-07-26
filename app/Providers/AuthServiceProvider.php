@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
-        Passport::personalAccessTokensExpireIn(Carbon::now()->addHours(24));
+        Passport::personalAccessTokensExpireIn(Carbon::now()->addDay(5));
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
 
         //

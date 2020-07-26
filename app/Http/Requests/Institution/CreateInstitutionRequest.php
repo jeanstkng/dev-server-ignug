@@ -24,9 +24,8 @@ class CreateInstitutionRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required|min:4|max:200',
-            'name' => 'required|min:4|max:200',
-            // 'telefono' => 'required|unique:directorios,telefono,' . $this->route('directorio')->id
+            'code' => ['required', 'min:4', 'max:200', 'unique:pgsql-ignug.institutions,code'],
+            'name' => ['required', 'min:4', 'max:200', 'unique:pgsql-ignug.institutions,name']
         ];
     }
 }

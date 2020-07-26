@@ -31,12 +31,12 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $login = $request->validate([
-            'email' => 'required|string',
+        $request->validate([
+            'user_name' => 'required|string',
             'password' => 'required|string',
 
         ]);
-        $user = User::where('identification', $request->user_name)->with('roles')->first();
+        $user = User::where('user_name', $request->user_name)->with('roles')->first();
         if (!$user) {
             return response()->json([
                 'errors' => [
@@ -47,7 +47,7 @@ class AuthController extends Controller
             ], 404);
         }
         $roles = $user->roles()->get();
-        if (!Auth::attempt(['identification' => $request->user_name, 'password' => $request->password])) {
+        if (!Auth::attempt(['user_name' => $request->user_name, 'password' => $request->password])) {
             return response()->json('Unauthorized', 401);
         }
 

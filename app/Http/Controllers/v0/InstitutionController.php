@@ -15,7 +15,10 @@ class InstitutionController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $institutions = Institution::where('name', 'like', '%' . $request->search . '%')->get();
+            $institutions = Institution::where('code', 'like', '%' . $request->search . '%')
+                ->orWhere('name', 'like', '%' . $request->search . '%')
+                ->limit(1000)
+                ->get();
         } else {
             $institutions = Institution::all();
         }

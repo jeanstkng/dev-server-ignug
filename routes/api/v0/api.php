@@ -61,6 +61,7 @@ Route::group(['prefix' => 'tasks'], function () {
         Route::get('all', 'v0\TaskController@all');
         Route::get('catalogues', 'v0\TaskController@allCatalogues');
         Route::get('current_day', 'v0\TaskController@getCurrenDate');
+        Route::get('history', 'v0\TaskController@getHistory');
         Route::post('', 'v0\TaskController@store');
         Route::put('', 'v0\TaskController@update');
         Route::delete('{id}', 'v0\TaskController@destroy');

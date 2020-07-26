@@ -46,6 +46,26 @@ class TaskController extends Controller
         ], 200);
     }
 
+    public function getHistory(Request $request)
+    {
+        $teacher = Teacher::where('user_id', $request->user_id)->first();
+        $attendances = $teacher->attendances()
+            ->with(['tasks' => function ($query) {
+                $query->with('type')->where('state_id', '<>', '3');
+            }])
+            ->with('type')
+            ->where('state_id', '<>', '3')
+            ->whereBetween('date', array($request->start_date, $request->end_date))
+            ->get();
+
+        return response()->json([
+            'data' => [
+                'type' => 'attendances',
+                'attributes' => $attendances
+            ]
+        ], 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
