@@ -79,11 +79,4 @@ Route::group(['prefix' => 'attendances'], function () {
     });
 });
 
-Route::group(['prefix' => 'institutions'], function () {
-
-    Route::group(['middleware' => 'auth:api'], function () {
-
-    });
-});
-
 Route::apiResource('institutions', 'v0\InstitutionController');
