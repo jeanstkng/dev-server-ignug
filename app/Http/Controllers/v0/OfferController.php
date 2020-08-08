@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 class OfferController extends Controller
 {
 
+    /**
+     * Obtiene todas las ofertas activas dentro del rango de fecha actual.
+     */
     function getAllOffers()
     {
         $now = Carbon::now();
@@ -20,7 +23,6 @@ class OfferController extends Controller
             ->where('start_date', '<=', $now->format('Y-m-d'))
             ->get();
         return response()->json(['offers' => $offers], 200);
-
     }
 
     function getOffers(Request $request)
@@ -43,7 +45,10 @@ class OfferController extends Controller
 
     }
 
-    function filterOffers2(Request $request)
+    /**
+     * Para filtro avanzado de pantalla principal de ofertas.
+     */
+    function advancedFilterOffers(Request $request)
     {
         $data = $request->json()->all();
         $dataFilter = $data['filter'];
@@ -67,6 +72,9 @@ class OfferController extends Controller
 
     }
 
+    /**
+     * Filtro de busqueda normal, segun disponibilidad de la oferta en fecha y activo, y paginado.
+     */
     function filterOffers(Request $request)
     {
         $now = Carbon::now();
@@ -88,6 +96,18 @@ class OfferController extends Controller
                 'to' => $offers->lastItem()
             ], 'offers' => $offers], 200);
 
+    }
+
+    /**
+     * Cuenta todas las ofertas activas dentro del rango de fecha actual.
+     */
+    function getTotalOffers() {
+        $now = Carbon::now();
+        $totalOffers = \App\Offer::where('state', 'ACTIVE')
+            ->where('finish_date', '>=', $now->format('Y-m-d'))
+            ->where('start_date', '<=', $now->format('Y-m-d'))
+            ->count();
+        return response()->json(['totalOffers' => $totalOffers], 200);
     }
 
     function filterOffersFields(Request $request)

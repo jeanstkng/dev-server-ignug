@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 class CompanyController extends Controller
 {
 
+    function getTotalCompanies() {
+        $totalCompanies = \App\Company::where('state', 'ACTIVE')->count();
+        return response()->json(['totalCompanies' => $totalCompanies], 200);
+    }
+
     function applyPostulant(Request $request)
     {
         try {
