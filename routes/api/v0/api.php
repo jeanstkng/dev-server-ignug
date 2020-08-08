@@ -92,25 +92,22 @@ Route::group(['prefix' => 'auth'], function () {
 // Rutas ofertas
 Route::group(['prefix' => 'offers'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('/professionals', 'OfferController@getAppliedProfessionals');
-        Route::post('/professionals', 'OfferController@createProfessional');
-        Route::post('', 'OfferController@createOffer');
-        Route::put('', 'OfferController@updateOffer');
-        Route::delete('', 'OfferController@deleteOffer');
-        Route::delete('/finish', 'OfferController@finishOffer');
-        Route::post('/filter', 'OfferController@filterOffers');
-        Route::get('', 'OfferController@getAllOffers');
-        Route::get('/totalOffers', function () {
-            $now = Carbon::now();
-            $totalOffers = \App\Offer::where('state', 'ACTIVE')
-                ->where('finish_date', '>=', $now->format('Y-m-d'))
-                ->where('start_date', '<=', $now->format('Y-m-d'))
-                ->count();
-            return response()->json(['totalOffers' => $totalOffers], 200);
-        });
-        Route::get('/opportunities/filter', 'OfferController@filterOffersFields');
-        Route::get('/opportunities/validateAppliedOffer', 'OfferController@validateAppliedOffer');
-        Route::post('/opportunities/apply', 'OfferController@applyOffer');
-        Route::get('/opportunities', 'OfferController@getOffers');
+        Route::get('', 'OfferController@getAllOffers'); // Trae todas las ofertas.
+        Route::get('/opportunities', 'OfferController@getOffers'); // Trae todas las ofertas con filtros
+
+        Route::get('/totalOffers', 'OfferController@getTotalOffers'); // Cuenta todas las ofertas.
+        Route::post('/filter', 'OfferController@filterOffers'); // Filtra las ofertas segun el buscador.
+
+        // Route::get('/professionals', 'OfferController@getAppliedProfessionals');
+        // Route::get('/opportunities/validateAppliedOffer', 'OfferController@validateAppliedOffer');
+        // Route::post('/opportunities/apply', 'OfferController@applyOffer');
+
+        // Estos metodo de traer todos los profesionales y companies no nos corresponde como tal,
+        // Preguntar al ing
+        Route::get('/totalProfessionals', 'ProfessionalController@getTotalProfessionals'); 
+        Route::get('/totalCompanies', 'CompanyController@getTotalCompanies');
+
+        // Route::get('/opportunities/filter', 'OfferController@filterOffersFields');
+
     });
 });

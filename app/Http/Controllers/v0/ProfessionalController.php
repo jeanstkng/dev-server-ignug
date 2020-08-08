@@ -19,6 +19,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProfessionalController extends Controller
 {
+
+    /**
+     * Contar los profesionales vinculados.
+     */
+    function getTotalProfessionals() {
+        $totalProfessionals = \App\Professional::where('state', 'ACTIVE')->count();
+        return response()->json(['totalProfessionals' => $totalProfessionals], 200);
+    }
+
     function getAbilities(Request $request)
     {
         try {
@@ -272,30 +281,30 @@ class ProfessionalController extends Controller
         }
     }
 
-    function filterOffers(Request $request)
-    {
+    /** este metodo debe estar unicamente en ofertas */
+    // function filterOffers(Request $request)
+    // {
+    //     //para tener varias condiciones en un array
+    //     //$users = User::orWhere([$request->conditions])
+    //     $data = $request->json()->all();
+    //     $offers = Offer::orWhere('broad_field', 'like', $data['broad_field'] . '%')
+    //         ->orWhere('specific_field', 'like', $data['specific_field'] . '%')
+    //         ->orWhere('position', 'like', $data['position'] . '%')
+    //         ->orWhere('remuneration', 'like', $data['remuneration'] . '%')
+    //         ->orWhere('working_day', 'like', $data['working_day'] . '%')
+    //         ->orderby($request->field, $request->order)
+    //         ->paginate($request->limit);
+    //     return response()->json([
+    //         'pagination' => [
+    //             'total' => $offers->total(),
+    //             'current_page' => $offers->currentPage(),
+    //             'per_page' => $offers->perPage(),
+    //             'last_page' => $offers->lastPage(),
+    //             'from' => $offers->firstItem(),
+    //             'to' => $offers->lastItem()
+    //         ], 'offers' => $offers], 200);
 
-        //para tener varias condiciones en un array
-        //$users = User::orWhere([$request->conditions])
-        $data = $request->json()->all();
-        $offers = Offer::orWhere('broad_field', 'like', $data['broad_field'] . '%')
-            ->orWhere('specific_field', 'like', $data['specific_field'] . '%')
-            ->orWhere('position', 'like', $data['position'] . '%')
-            ->orWhere('remuneration', 'like', $data['remuneration'] . '%')
-            ->orWhere('working_day', 'like', $data['working_day'] . '%')
-            ->orderby($request->field, $request->order)
-            ->paginate($request->limit);
-        return response()->json([
-            'pagination' => [
-                'total' => $offers->total(),
-                'current_page' => $offers->currentPage(),
-                'per_page' => $offers->perPage(),
-                'last_page' => $offers->lastPage(),
-                'from' => $offers->firstItem(),
-                'to' => $offers->lastItem()
-            ], 'offers' => $offers], 200);
-
-    }
+    // }
 
     function getAppliedCompanies(Request $request)
     {
