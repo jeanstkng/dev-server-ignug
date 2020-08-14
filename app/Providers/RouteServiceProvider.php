@@ -72,26 +72,26 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api/v0')
+        Route::prefix('api/authentication')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path('routes/api/v0/api.php'));
+            ->group(base_path('routes/api/authentication/api.php'));
+        Route::prefix('api/attendance')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api/attendance/api.php'));
         Route::prefix('api/raffle')
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/raffle/api.php'));
-        Route::prefix('api/v2')
+        Route::prefix('api/job_board')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path('routes/api/v2/api.php'));
-        Route::prefix('api/v3')
+            ->group(base_path('routes/api/job_board/api.php'));
+        Route::prefix('api/cecy')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path('routes/api/v3/api.php'));
-        Route::prefix('api/v4')
-            ->middleware('api')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/api/v4/api.php'));
+            ->group(base_path('routes/api/cecy/api.php'));
         Route::prefix('api/v5')
             ->middleware('api')
             ->namespace($this->namespace)

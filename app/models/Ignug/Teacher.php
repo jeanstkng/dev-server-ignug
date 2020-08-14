@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Ignug;
 
 use App\User;
+use App\Models\Attendance\Attendance;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 

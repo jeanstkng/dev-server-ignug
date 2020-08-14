@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Ignug;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Institution extends Model implements Auditable
