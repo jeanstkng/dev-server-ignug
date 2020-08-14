@@ -16,7 +16,7 @@ class CreateCompaniesTable extends Migration
         Schema::connection('pgsql-job-board')->create('companies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('authentication.users');
-            $table->string('type_id')->constrained('catalogues');
+            $table->foreignId('type_id')->constrained('catalogues');
             $table->string('trade_name', 300);
             $table->string('comercial_activity', 500);
             $table->foreignId('state_id')->constrained('ignug.states');

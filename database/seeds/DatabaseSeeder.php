@@ -500,5 +500,6 @@ class DatabaseSeeder extends Seeder
 
 
        // factory(App\User::class, 100)->create();
+        factory(App\Models\JobBoard::class, 10)->create();
     }
 }

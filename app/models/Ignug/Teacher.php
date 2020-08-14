@@ -12,9 +12,7 @@ class Teacher extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
 
     protected $connection = 'pgsql-ignug';
-    protected $fillable = [
-
-    ];
+    protected $fillable = [];
 
     public function attendances()
     {
