@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Attendance::class, function (Faker $faker) {
     return [
-        //
+        'code'=>$faker->word
     ];
 });

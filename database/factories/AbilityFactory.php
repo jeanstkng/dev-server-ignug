@@ -2,11 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Teacher;
+use App\Models\JobBoard;
 use Faker\Generator as Faker;
 
-$factory->define(Teacher::class, function (Faker $faker) {
+$factory->define(Ability::class, function (Faker $faker) {
     return [
-        'name' => $faker->firstNameFemale
+        //
     ];
 });
