@@ -1,10 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models\JobBoard;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\JobBoard\Offer;
 
-class Professional extends Model
+class Professional extends Model implements Auditable
 {
     /**
      * The attributes that are mass assignable.
@@ -28,7 +30,7 @@ class Professional extends Model
 
     public function offers()
     {
-        return $this->belongsToMany('App\Offer')->withTimestamps();
+        return $this->belongsToMany(Offer::class)->withTimestamps();
     }
 
     public function companies()
