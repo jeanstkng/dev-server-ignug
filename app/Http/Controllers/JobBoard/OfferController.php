@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\JobBoard;
 
-use App\Company;
-use App\Offer;
-use App\Professional;
+
+use App\Http\Controllers\Controller;
+use App\Models\JobBoard\Company;
+use App\Models\JobBoard\Offer;
+use App\Models\JobBoard\Professional;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -103,7 +105,7 @@ class OfferController extends Controller
      */
     function getTotalOffers() {
         $now = Carbon::now();
-        $totalOffers = \App\Offer::where('state', 'ACTIVE')
+        $totalOffers = Offer::where('state_id', '0')
             ->where('finish_date', '>=', $now->format('Y-m-d'))
             ->where('start_date', '<=', $now->format('Y-m-d'))
             ->count();
