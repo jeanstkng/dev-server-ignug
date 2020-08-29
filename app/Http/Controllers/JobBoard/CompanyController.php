@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\JobBoard;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use App\Company;
+use App\Models\JobBoard\Company;
 use App\Offer;
 use App\Professional;
 use Illuminate\Database\QueryException;
@@ -13,7 +14,7 @@ class CompanyController extends Controller
 {
 
     function getTotalCompanies() {
-        $totalCompanies = \App\Company::where('state', 'ACTIVE')->count();
+        $totalCompanies = Company::where('state_id', '0')->count();
         return response()->json(['totalCompanies' => $totalCompanies], 200);
     }
 

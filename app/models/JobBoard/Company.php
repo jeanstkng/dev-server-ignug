@@ -1,8 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models\JobBoard;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\JobBoard\Offer;
 
 class Company extends Model
 {

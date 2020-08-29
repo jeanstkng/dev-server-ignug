@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\JobBoard;
 
+use App\Http\Controllers\Controller;
 use App\Ability;
 use App\AcademicFormation;
 use App\Company;
 use App\Course;
 use App\Language;
 use App\Offer;
-use App\Professional;
+use App\Models\JobBoard\Professional;
 use App\ProfessionalExperience;
 use App\ProfessionalReference;
 use Exception;
@@ -24,7 +25,7 @@ class ProfessionalController extends Controller
      * Contar los profesionales vinculados.
      */
     function getTotalProfessionals() {
-        $totalProfessionals = \App\Professional::where('state', 'ACTIVE')->count();
+        $totalProfessionals = Professional::where('state_id', '0')->count();
         return response()->json(['totalProfessionals' => $totalProfessionals], 200);
     }
 
