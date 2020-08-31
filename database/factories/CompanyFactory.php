@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Ignug\State;
+use App\Models\JobBoard\Company;
 use Faker\Generator as Faker;
 
-$factory->define(State::class, function (Faker $faker) {
+$factory->define(Company::class, function (Faker $faker) {
     return [
         //
     ];

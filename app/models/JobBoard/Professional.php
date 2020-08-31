@@ -5,9 +5,12 @@ namespace App\Models\JobBoard;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Models\JobBoard\Offer;
+use App\Models\JobBoard\Company;
 
 class Professional extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+    protected $connection = 'pgsql-job-board';
     /**
      * The attributes that are mass assignable.
      *
@@ -35,7 +38,7 @@ class Professional extends Model implements Auditable
 
     public function companies()
     {
-        return $this->belongsToMany('App\Company')->withTimestamps();
+        return $this->belongsToMany(Company::class)->withTimestamps();
     }
 
     public function user()
@@ -45,32 +48,32 @@ class Professional extends Model implements Auditable
 
     public function academicFormations()
     {
-        return $this->hasMany('App\AcademicFormation');
+        return $this->hasMany('App\Models\JobBoard\AcademicFormation');
     }
 
     public function abilities()
     {
-        return $this->hasMany('App\Ability');
+        return $this->hasMany('App\Models\JobBoard\Ability');
     }
 
     public function languages()
     {
-        return $this->hasMany('App\Language');
+        return $this->hasMany('App\Models\JobBoard\Language');
     }
 
     public function courses()
     {
-        return $this->hasMany('App\Course');
+        return $this->hasMany('App\Models\JobBoard\Course');
     }
 
     public function professionalExperiences()
     {
-        return $this->hasMany('App\ProfessionalExperience');
+        return $this->hasMany('App\Models\JobBoard\ProfessionalExperience');
     }
 
     public function professionalReferences()
     {
-        return $this->hasMany('App\ProfessionalReference');
+        return $this->hasMany('App\Models\JobBoard\ProfessionalReference');
     }
 
 

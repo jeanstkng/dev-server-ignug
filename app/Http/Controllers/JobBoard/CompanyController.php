@@ -14,7 +14,7 @@ class CompanyController extends Controller
 {
 
     function getTotalCompanies() {
-        $totalCompanies = Company::where('state_id', '0')->count();
+        $totalCompanies = Company::where('state_id', '1')->count();
         return response()->json(['totalCompanies' => $totalCompanies], 200);
     }
 

@@ -20,7 +20,7 @@ class OfferController extends Controller
     function getAllOffers()
     {
         $now = Carbon::now();
-        $offers = Offer::where('state_id', '0')
+        $offers = Offer::where('state_id', '1')
             ->where('finish_date', '>=', $now->format('Y-m-d'))
             ->where('start_date', '<=', $now->format('Y-m-d'))
             ->get();
@@ -30,7 +30,7 @@ class OfferController extends Controller
     function getOffers(Request $request)
     {
         $now = Carbon::now();
-        $offers = Offer::where('state_id', '0')
+        $offers = Offer::where('state_id', '1')
             ->where('finish_date', '>=', $now->format('Y-m-d'))
             ->where('start_date', '<=', $now->format('Y-m-d'))
             ->orderby($request->field, $request->order)
@@ -44,7 +44,6 @@ class OfferController extends Controller
                 'from' => $offers->firstItem(),
                 'to' => $offers->lastItem()
             ], 'offers' => $offers], 200);
-
     }
 
     /**
@@ -97,7 +96,6 @@ class OfferController extends Controller
                 'from' => $offers->firstItem(),
                 'to' => $offers->lastItem()
             ], 'offers' => $offers], 200);
-
     }
 
     /**
@@ -105,7 +103,7 @@ class OfferController extends Controller
      */
     function getTotalOffers() {
         $now = Carbon::now();
-        $totalOffers = Offer::where('state_id', '0')
+        $totalOffers = Offer::where('state_id', '1')
             ->where('finish_date', '>=', $now->format('Y-m-d'))
             ->where('start_date', '<=', $now->format('Y-m-d'))
             ->count();
@@ -115,7 +113,7 @@ class OfferController extends Controller
     function filterOffersFields(Request $request)
     {
         $now = Carbon::now();
-        $offers = Offer::where('state_id', '0')
+        $offers = Offer::where('state_id', '1')
             ->where('code', 'like', strtoupper($request->filter) . '%')
             ->OrWhere('position', 'like', '%' . strtoupper($request->filter) . '%')
             ->OrWhere('activities', 'like', strtoupper($request->filter) . '%')
@@ -236,7 +234,7 @@ class OfferController extends Controller
                 $appliedOffer = DB::table('offer_professional')
                     ->where('offer_id', $request->offer_id)
                     ->where('professional_id', $professional->id)
-                    ->where('state_id', '0')
+                    ->where('state_id', '1')
                     ->first();
                 if ($appliedOffer) {
                     return response()->json(true, 200);
@@ -273,7 +271,7 @@ class OfferController extends Controller
                 $appliedOffer = DB::table('offer_professional')
                     ->where('offer_id', $offer['id'])
                     ->where('professional_id', $professional->id)
-                    ->where('state_id', '0')
+                    ->where('state_id', '1')
                     ->first();
                 if (!$appliedOffer) {
                     $professional->offers()->attach($offer['id']);

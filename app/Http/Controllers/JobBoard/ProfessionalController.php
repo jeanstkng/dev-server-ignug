@@ -25,7 +25,7 @@ class ProfessionalController extends Controller
      * Contar los profesionales vinculados.
      */
     function getTotalProfessionals() {
-        $totalProfessionals = Professional::where('state_id', '0')->count();
+        $totalProfessionals = Professional::where('state_id', '1')->count();
         return response()->json(['totalProfessionals' => $totalProfessionals], 200);
     }
 
