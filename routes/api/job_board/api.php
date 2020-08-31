@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobBoard\OfferController;
-
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,7 +21,6 @@ Route::group(['prefix' => 'offers'], function () {
         Route::get('', 'JobBoard\OfferController@getAllOffers'); // Trae todas las ofertas.
         Route::get('/opportunities', 'JobBoard\OfferController@getOffers'); // Trae todas las ofertas con filtros
 
-        Route::get('/totalOffers', 'JobBoard\OfferController@getTotalOffers'); // Cuenta todas las ofertas.
         Route::post('/filter', 'JobBoard\OfferController@filterOffers'); // Filtra las ofertas segun el buscador.
 
         // Route::get('/professionals', 'OfferController@getAppliedProfessionals');
@@ -30,10 +29,19 @@ Route::group(['prefix' => 'offers'], function () {
 
         // Estos metodo de traer todos los profesionales y companies no nos corresponde como tal,
         // Preguntar al ing
-        Route::get('/totalProfessionals', 'JobBoard\ProfessionalController@getTotalProfessionals'); 
-        Route::get('/totalCompanies', 'JobBoard\CompanyController@getTotalCompanies');
-
         // Route::get('/opportunities/filter', 'OfferController@filterOffersFields');
 
     // });
 });
+// Total de Empresas, Profesionales y Ofertas
+Route::get('/total', function () {
+    $now = Carbon::now();
+    $totalCompanies = \App\Models\JobBoard\Company::where('state_id', 1)->count();
+    $totalProfessionals = \App\Models\JobBoard\Professional::where('state_id', 1)->count();
+    $totalOffers = \App\Models\JobBoard\Offer::where('state_id', 1)
+        ->where('finish_date', '>=', $now->format('Y-m-d'))
+        ->where('start_date', '<=', $now->format('Y-m-d'))
+        ->count();
+    return response()->json(['totalCompanies' => $totalCompanies, 'totalOffers' => $totalOffers, 'totalProfessionals' => $totalProfessionals ], 200);
+});
+
