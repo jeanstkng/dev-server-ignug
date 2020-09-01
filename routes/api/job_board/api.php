@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobBoard\OfferController;
 use Carbon\Carbon;
+use App\Models\JobBoard\Category;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,5 +44,16 @@ Route::get('/total', function () {
         ->where('start_date', '<=', $now->format('Y-m-d'))
         ->count();
     return response()->json(['totalCompanies' => $totalCompanies, 'totalOffers' => $totalOffers, 'totalProfessionals' => $totalProfessionals ], 200);
+});
+
+Route::group(['prefix' => 'categories'], function () {
+    Route::get('/index', function () {
+        $categories=Category::with('children')->get();
+        return response()->json([
+            'data' => [
+                'categories' =>$categories
+            ]
+        ], 200);
+    });
 });
 
