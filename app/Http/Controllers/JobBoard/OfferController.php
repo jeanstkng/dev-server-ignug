@@ -82,7 +82,7 @@ class OfferController extends Controller
         $data = $request->json()->all();
         $dataFilter = $data['filters'];
         $offers = Offer::orWhere($dataFilter['conditions'])
-            ->where('state', 'ACTIVE')
+            ->where('state_id', 1)
             ->where('finish_date', '>=', $now->format('Y-m-d'))
             ->where('start_date', '<=', $now->format('Y-m-d'))
             ->orderby($request->field, $request->order)

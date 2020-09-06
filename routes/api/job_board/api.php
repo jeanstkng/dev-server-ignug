@@ -46,14 +46,8 @@ Route::get('/total', function () {
     return response()->json(['totalCompanies' => $totalCompanies, 'totalOffers' => $totalOffers, 'totalProfessionals' => $totalProfessionals ], 200);
 });
 
-Route::group(['prefix' => 'categories'], function () {
-    Route::get('/index', function () {
-        $categories=Category::with('children')->get();
-        return response()->json([
-            'data' => [
-                'categories' =>$categories
-            ]
-        ], 200);
-    });
-});
 
+
+Route::group(['prefix' => 'categories'], function () {
+    Route::get('', 'JobBoard\CategoryController@index');
+});

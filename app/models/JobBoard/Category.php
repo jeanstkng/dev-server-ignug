@@ -4,6 +4,7 @@ namespace App\Models\JobBoard;
 
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\Ignug\State;
 
 class Category extends Model implements Auditable
 {
@@ -12,7 +13,6 @@ class Category extends Model implements Auditable
     protected $connection = 'pgsql-job-board';
     protected $fillable = [
         'code',
-        'parent_code_id',
         'name',
         'type',
         'icon'
