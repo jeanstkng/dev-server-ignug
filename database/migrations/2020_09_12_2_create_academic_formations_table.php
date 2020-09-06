@@ -16,8 +16,7 @@ class CreateAcademicFormationsTable extends Migration
         Schema::connection('pgsql-job-board')->create('academic_formations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('professional_id')->constrained();
-            $table->foreignId('institution_id')->constrained('catalogues');
-            $table->foreignId('career_id')->constrained('catalogues');
+            $table->foreignId('category_id')->constrained();
             $table->foreignId('professional_degree_id')->constrained('catalogues');
             $table->date('registration_date')->nullable();
             $table->string('senescyt_code')->nullable();
