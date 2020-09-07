@@ -298,10 +298,9 @@ que gaver ajaja ni me di cuenta jaja
             $offer = $data['offer'];
             $professional = Professional::where('user_id', $user['id'])->first();
             if ($professional) {
-                $appliedOffer = DB::table('offer_professional')
+                $appliedOffer = DB::table('job_board.offer_professional')
                     ->where('offer_id', $offer['id'])
                     ->where('professional_id', $professional->id)
-                    ->where('state_id', '1')
                     ->first();
                 if (!$appliedOffer) {
                     $professional->offers()->attach($offer['id']);
