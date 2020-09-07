@@ -32,8 +32,11 @@ class CreateOffersTable extends Migration
             $table->date('finish_date');
             $table->text('activities');
             $table->text('aditional_information')->nullable();
-            $table->foreignId('location_id')->constrained();
+            $table->foreignId('province_id')->constrained('locations');
+            $table->foreignId('city_id')->constrained('locations');
             $table->foreignId('state_id')->constrained('ignug.states');
+            $table->foreignId('father_category_id')->constrained('categories');
+            $table->foreignId('children_category_id')->constrained('categories');
             $table->timestamps();
         });
     }

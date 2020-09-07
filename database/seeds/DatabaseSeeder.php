@@ -2373,9 +2373,7 @@ class DatabaseSeeder extends Seeder
             'comercial_activity' => 'Online store',
             'state_id' => 1,
         ]);
-        factory(App\Models\JobBoard\Location::class)->create([
-            'id' => 1,
-        ]);
+        factory(App\Models\JobBoard\Location::class, 10)->create();
         factory(App\Models\JobBoard\Offer::class, 10)->create();
 
        // factory(App\User::class, 100)->create();

@@ -16,6 +16,7 @@ class Category extends Model implements Auditable
         'name',
         'type',
         'icon'
+        
     ];
 
     public function state()

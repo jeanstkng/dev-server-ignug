@@ -15,6 +15,7 @@ class CreateJobLocationsTable extends Migration
     {
         Schema::connection('pgsql-job-board')->create('locations', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100);
             $table->timestamps();
         });
     }

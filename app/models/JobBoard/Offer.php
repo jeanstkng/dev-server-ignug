@@ -7,8 +7,8 @@ use OwenIt\Auditing\Contracts\Auditable;
 use App\Models\JobBoard\Company;
 use App\Models\JobBoard\Professional;
 use App\Models\JobBoard\Location;
+use App\Models\JobBoard\Category;
 use App\Models\Ignug\State;
-
 
 class Offer extends Model implements Auditable
 {
@@ -37,7 +37,8 @@ class Offer extends Model implements Auditable
         'aditional_information',
         'start_date',
         'finish_date'
-    ];
+
+    ]; 
 
     public function company()
     {
@@ -49,7 +50,12 @@ class Offer extends Model implements Auditable
         return $this->belongsToMany(Professional)->withTimestamps();
     }
 
-    public function location()
+    public function city()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function province()
     {
         return $this->belongsTo(Location::class);
     }
@@ -57,5 +63,15 @@ class Offer extends Model implements Auditable
     public function state()
     {
         return $this->belongsTo(State::class);
+    }
+
+    public function father_category()
+    { 
+        return $this->belongsTo(Category::class);
+    }
+
+    public function children_category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

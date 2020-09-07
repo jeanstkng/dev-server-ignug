@@ -36,8 +36,10 @@ $factory->define(Offer::class, function (Faker $faker) {
         'start_date' => $faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now', $timezone = null),
         'finish_date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+2 years', $timezone = null),
         'company_id' => 1,
-        'location_id' => 1,
-        'state_id' => 1
-
+        'city_id' => $faker->numberBetween($min = 1, $max = 9),
+        'province_id' => $faker->numberBetween($min = 1, $max = 9),
+        'state_id' => 1,
+        'father_category_id' => $faker->numberBetween($min = 1, $max = 9),
+        'children_category_id' => $faker->numberBetween($min = 10, $max = 18),
     ];
 });

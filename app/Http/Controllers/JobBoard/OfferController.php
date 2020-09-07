@@ -5,6 +5,7 @@ namespace App\Http\Controllers\JobBoard;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobBoard\Company;
+use App\Models\JobBoard\Category;
 use App\Models\JobBoard\Offer;
 use App\Models\JobBoard\Professional;
 use Carbon\Carbon;
@@ -20,21 +21,36 @@ class OfferController extends Controller
     function getAllOffers()
     {
         $now = Carbon::now();
-        $offers = Offer::where('state_id', '1')
+        $offers = Offer::with('father_category')->with('children_category')
+            ->with('city')->with('province')->where('state_id', '1')
             ->where('finish_date', '>=', $now->format('Y-m-d'))
             ->where('start_date', '<=', $now->format('Y-m-d'))
             ->get();
         return response()->json(['offers' => $offers], 200);
     }
+/* 
+chevere 
+que gaver ajaja ni me di cuenta jaja
+    with(['father_category' => function($query) 
+            { $query->where('father_category_id', ) }]) 
+            NO se escucha pilas 
+            mija veamos el proyecto del Maicol haber si usa algun with
 
+            */
     function getOffers(Request $request)
     {
         $now = Carbon::now();
-        $offers = Offer::where('state_id', '1')
+        $offers = Offer::with('father_category')->with('children_category')
+            ->with('city')->with('province')->where('state_id', '1')
             ->where('finish_date', '>=', $now->format('Y-m-d'))
             ->where('start_date', '<=', $now->format('Y-m-d'))
             ->orderby($request->field, $request->order)
-            ->paginate($request->limit);
+            ->paginate($request->limit)
+            ->get();
+
+            /* ->with(['state' => function ($query) {
+                $query->where('code', '1');
+            }]) */
         return response()->json([
             'pagination' => [
                 'total' => $offers->total(),
@@ -48,6 +64,8 @@ class OfferController extends Controller
 
     /**
      * Para filtro avanzado de pantalla principal de ofertas.
+     * yo nunca jaja
+     * con with
      */
     function advancedFilterOffers(Request $request)
     {
@@ -81,7 +99,19 @@ class OfferController extends Controller
         $now = Carbon::now();
         $data = $request->json()->all();
         $dataFilter = $data['filters'];
-        $offers = Offer::orWhere($dataFilter['conditions'])
+        $offers = Offer::with(['father_category' => function ($query) {
+                $query->orWhere($dataFilter['conditionsCategoryFather']);
+                }])
+            ->with(['children_category' => function ($query) {
+                $query->orWhere($dataFilter['conditionsCategoryChildren']);
+                }])
+            ->with(['city' => function ($query) {
+                $query->orWhere($dataFilter['conditionsCity']);
+                }])
+            ->with(['province' => function ($query) {
+                $query->orWhere($dataFilter['conditionsProvince']);
+                }])
+            ->orWhere($dataFilter['conditions'])
             ->where('state_id', 1)
             ->where('finish_date', '>=', $now->format('Y-m-d'))
             ->where('start_date', '<=', $now->format('Y-m-d'))
