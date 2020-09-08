@@ -8,6 +8,8 @@ use App\Models\JobBoard\Company;
 use App\Models\JobBoard\Category;
 use App\Models\JobBoard\Offer;
 use App\Models\JobBoard\Professional;
+use App\Models\JobBoard\Location;
+use App\Models\Ignug\State;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -29,12 +31,9 @@ class OfferController extends Controller
         return response()->json(['offers' => $offers], 200);
     }
 /* 
-chevere 
-que gaver ajaja ni me di cuenta jaja
+
     with(['father_category' => function($query) 
             { $query->where('father_category_id', ) }]) 
-            NO se escucha pilas 
-            mija veamos el proyecto del Maicol haber si usa algun with
 
             */
     function getOffers(Request $request)
@@ -99,16 +98,16 @@ que gaver ajaja ni me di cuenta jaja
         $now = Carbon::now();
         $data = $request->json()->all();
         $dataFilter = $data['filters'];
-        $offers = Offer::with(['father_category' => function ($query) {
+        $offers = Offer::with(['father_category' => function ($query) use($dataFilter) {
                 $query->orWhere($dataFilter['conditionsCategoryFather']);
                 }])
-            ->with(['children_category' => function ($query) {
+            ->with(['children_category' => function ($query) use($dataFilter) {
                 $query->orWhere($dataFilter['conditionsCategoryChildren']);
                 }])
-            ->with(['city' => function ($query) {
+            ->with(['city' => function ($query) use($dataFilter) {
                 $query->orWhere($dataFilter['conditionsCity']);
                 }])
-            ->with(['province' => function ($query) {
+            ->with(['province' => function ($query) use($dataFilter) {
                 $query->orWhere($dataFilter['conditionsProvince']);
                 }])
             ->orWhere($dataFilter['conditions'])
@@ -163,49 +162,75 @@ que gaver ajaja ni me di cuenta jaja
 
     }
 
-    function createOffer(Request $request)
+    // CRUD
+    public function index(Request $request)
     {
-        $data = $request->json()->all();
-        $company = Company::findOrFail($request->company_id);
-        $response = $company->offers()->create([
-            'code' => $data['code']
-        ]);
-        return response()->json($response, 201);
-
+        if ($request->has('search')) {
+            $offerts = Offer::with('father_category')->with('children_category')
+            ->with('city')->with('province')->where('code', 'ilike', '%' . $request->search . '%')
+                ->orWhere('position', 'ilike', '%' . $request->search . '%')
+                ->limit(1000)
+                ->get();
+        } else {
+            $offerts = Offer::all();
+        }
+        return response()->json($offerts, 200);
     }
 
-    function updateOffer(Request $request)
+    public function store(Request $request)
     {
-
         $data = $request->json()->all();
-        $offer = Offer::find($request->id)->update([
-            'code' => $data['code']
+        $offer = DB::table('job_board.offers')->insert([
+                "code" => $data['code'],
+                "company_id" => $data['company_id'],
+                "contact" => $data['contact'],
+                "email" => $data['email'],
+                "phone" => $data['phone'],
+                "cell_phone" => $data['cell_phone'],
+                "contract_type" => $data['contract_type'],
+                "position" => $data['position'],
+                "training_hours" => $data['training_hours'],
+                "remuneration" => $data['remuneration'],
+                "working_day" => $data['working_day'],
+                "number_jobs" => $data['number_jobs'],
+                "experience_time" => $data['experience_time'],
+                "activities" => $data['activities'],
+                "aditional_information" => $data['aditional_information'],
+                "start_date" => $data['start_date'],
+                "finish_date" => $data['finish_date'],
+                "city_id" => $data['city_id'],
+                "province_id" => $data['province_id'],
+                "father_category_id" => $data['father_category_id'],
+                "children_category_id" => $data['children_category_id'],
+                "state_id" => $data['state_id']
+            ]);
+        return response()->json($offer, 201);
+    }
+
+    public function show(Offert $offert)
+    {
+        $offer = Offer::with('father_category')->with('children_category')
+        ->with('city')->with('province')->findOrFail($offert)->get();
+        return response()->json(['offer' => $offer], 200);
+    }
+
+    public function update(Request $request)
+    {
+        $data = $request->json()->all();
+        $offert = Offer::find($data['id'])->update($data['offer']);
+        return response()->json($offert, 201);
+    }
+
+    public function destroy(Request $request)
+    {
+        $offer = Offer::findOrFail($request->id);
+        $offer->update([
+            'state_id' => 3
         ]);
         return response()->json($offer, 201);
-
     }
 
-    function deleteOffer(Request $request)
-    {
-        try {
-            DB::beginTransaction();
-            $offer = Offer::findOrFail($request->id);
-            $offer->delete();
-            $offer->professionals()->detach();
-            DB::commit();
-            return response()->json($offer, 201);
-        } catch (ModelNotFoundException $e) {
-            return response()->json($e, 405);
-        } catch (NotFoundHttpException  $e) {
-            return response()->json($e, 405);
-        } catch (QueryException  $e) {
-            return response()->json($e, 405);
-        } catch (Exception $e) {
-            return response()->json($e, 500);
-        } catch (Error $e) {
-            return response()->json($e, 500);
-        }
-    }
+    // CRUD END
 
     function finishOffer(Request $request)
     {

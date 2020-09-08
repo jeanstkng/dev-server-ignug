@@ -19,7 +19,9 @@ use App\Models\JobBoard\Category;
 // Rutas ofertas
 Route::group(['prefix' => 'offers'], function () {
     // Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('', 'JobBoard\OfferController@getAllOffers'); // Trae todas las ofertas.
+        Route::put('', 'JobBoard\OfferController@update');
+        Route::delete('', 'JobBoard\OfferController@destroy');
+        Route::get('/all', 'JobBoard\OfferController@getAllOffers'); // Trae todas las ofertas.
         Route::get('/opportunities', 'JobBoard\OfferController@getOffers'); // Trae todas las ofertas con filtros
 
         Route::post('/filter', 'JobBoard\OfferController@filterOffers'); // Filtra las ofertas segun el buscador.
@@ -27,13 +29,15 @@ Route::group(['prefix' => 'offers'], function () {
         // Route::get('/professionals', 'OfferController@getAppliedProfessionals');
         Route::get('/opportunities/validateAppliedOffer', 'JobBoard\OfferController@validateAppliedOffer');
         Route::post('/opportunities/apply', 'JobBoard\OfferController@applyOffer');
-
         // Estos metodo de traer todos los profesionales y companies no nos corresponde como tal,
         // Preguntar al ing
         // Route::get('/opportunities/filter', 'OfferController@filterOffersFields');
 
     // });
 });
+
+Route::apiResource('offers', 'JobBoard\OfferController');
+
 // Total de Empresas, Profesionales y Ofertas
 Route::get('/total', function () {
     $now = Carbon::now();

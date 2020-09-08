@@ -15,7 +15,7 @@ class CreateOffersTable extends Migration
     {
         Schema::connection('pgsql-job-board')->create('offers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained();
+            $table->foreignId('company_id')->constrained('companies');
             $table->string('code', 100);
             $table->string('contact', 200);
             $table->string('email', 100);
