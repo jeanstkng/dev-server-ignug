@@ -99,10 +99,19 @@ class OfferController extends Controller
         $data = $request->json()->all();
         $dataFilter = $data['filters'];
         $offers = Offer::with(['father_category' => function ($query) use($dataFilter) {
-                $query->orWhere($dataFilter['conditionsCategoryFather']);
+                foreach ($dataFilter['conditionsCategoryChildren'] as $key) {
+                    $i++;
+                    $query->orWhere($key);
+                }
+
+                // $query->orWhere($dataFilter['conditionsCategoryFather']);
                 }])
             ->with(['children_category' => function ($query) use($dataFilter) {
-                $query->orWhere($dataFilter['conditionsCategoryChildren']);
+                // $query->orWhere($dataFilter['conditionsCategoryChildren']);
+                foreach ($dataFilter['conditionsCategoryChildren'] as $key) {
+                    $i++;
+                    $query->orWhere($key);
+                }
                 }])
             ->with(['city' => function ($query) use($dataFilter) {
                 $query->orWhere($dataFilter['conditionsCity']);
