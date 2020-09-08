@@ -21,12 +21,11 @@ Route::group(['prefix' => 'offers'], function () {
     // Route::group(['middleware' => 'auth:api'], function () {
         Route::get('', 'JobBoard\OfferController@getAllOffers'); // Trae todas las ofertas.
         Route::get('/opportunities', 'JobBoard\OfferController@getOffers'); // Trae todas las ofertas con filtros
-
         Route::post('/filter', 'JobBoard\OfferController@filterOffers'); // Filtra las ofertas segun el buscador.
 
         // Route::get('/professionals', 'OfferController@getAppliedProfessionals');
-        Route::get('/opportunities/validateAppliedOffer', 'JobBoard\OfferController@validateAppliedOffer');
-        Route::post('/opportunities/apply', 'JobBoard\OfferController@applyOffer');
+        Route::get('/opportunities/validateAppliedOffer', 'JobBoard\OfferController@validateAppliedOffer');//valida si ya postulo a la oferta
+        Route::post('/opportunities/apply', 'JobBoard\OfferController@applyOffer');//aplicar a la oferta
 
         // Estos metodo de traer todos los profesionales y companies no nos corresponde como tal,
         // Preguntar al ing
