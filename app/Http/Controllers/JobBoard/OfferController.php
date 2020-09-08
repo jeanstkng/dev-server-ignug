@@ -100,7 +100,7 @@ class OfferController extends Controller
         $dataFilter = $data['filters'];
         $offers = Offer::with(['father_category' => function ($query) use($dataFilter) {
                 foreach ($dataFilter['conditionsCategoryChildren'] as $key) {
-                    $i++;
+                    // $i++;
                     $query->orWhere($key);
                 }
 
@@ -109,7 +109,7 @@ class OfferController extends Controller
             ->with(['children_category' => function ($query) use($dataFilter) {
                 // $query->orWhere($dataFilter['conditionsCategoryChildren']);
                 foreach ($dataFilter['conditionsCategoryChildren'] as $key) {
-                    $i++;
+                    // $i++;
                     $query->orWhere($key);
                 }
                 }])
