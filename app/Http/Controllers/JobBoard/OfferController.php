@@ -127,6 +127,7 @@ class OfferController extends Controller
             ], 'offers' => $offers], 200);
     }
 
+    
     /**
      * Cuenta todas las ofertas activas dentro del rango de fecha actual.
      */
@@ -286,10 +287,9 @@ class OfferController extends Controller
         try {
             $professional = Professional::where('user_id', $request->user_id)->first();
             if ($professional) {
-                $appliedOffer = DB::table('offer_professional')
+                $appliedOffer = DB::table('job_board.offer_professional')
                     ->where('offer_id', $request->offer_id)
                     ->where('professional_id', $professional->id)
-                    ->where('state_id', '1')
                     ->first();
                 if ($appliedOffer) {
                     return response()->json(true, 200);
