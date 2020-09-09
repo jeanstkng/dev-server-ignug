@@ -98,27 +98,14 @@ class OfferController extends Controller
         $now = Carbon::now();
         $data = $request->json()->all();
         $dataFilter = $data['filters'];
-        $offers = Offer::with(['father_category' => function ($query) use($dataFilter) {
-                foreach ($dataFilter['conditionsCategoryChildren'] as $key) {
-                    // $i++;
-                    $query->orWhere($key);
-                }
-
-                // $query->orWhere($dataFilter['conditionsCategoryFather']);
-                }])
-            ->with(['children_category' => function ($query) use($dataFilter) {
-                // $query->orWhere($dataFilter['conditionsCategoryChildren']);
-                foreach ($dataFilter['conditionsCategoryChildren'] as $key) {
-                    // $i++;
-                    $query->orWhere($key);
-                }
-                }])
-            ->with(['city' => function ($query) use($dataFilter) {
-                $query->orWhere($dataFilter['conditionsCity']);
-                }])
-            ->with(['province' => function ($query) use($dataFilter) {
-                $query->orWhere($dataFilter['conditionsProvince']);
-                }])
+        $offers = Offer::with(['father_category'])
+            ->with(['children_category'])
+            ->with(['city'])
+            ->with(['province'])
+            ->orWhere('father_category_id', '=', $dataFilter['conditionsCategoryFather'])
+            ->orWhere('children_category_id', '=', $dataFilter['conditionsCategoryChildren'])
+            ->orWhere($dataFilter['conditionsCity'])    
+            ->orWhere($dataFilter['conditionsProvince'])
             ->orWhere($dataFilter['conditions'])
             ->where('state_id', 1)
             ->where('finish_date', '>=', $now->format('Y-m-d'))
